@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, paper, scissors, ...</title>
+</head>
+<body>
+<h1>Rock, Paper, Scissors....</h1>
+<h2>Lizard, Spock!</h2>
+
+<div>
+    <h3>Amount of players</h3>
+    <select name="players" id="players">
+        <option value="1">1 Player</option>
+        <option value="2">2 Players</option>
+    </select>
+</div>
+
+<div>
+    <h3>Player 1</h3>
+    <select name="p1choice" id="p1choice"></select>
+</div>
+
+<div>
+    <h3>Player 2</h3>
+    <select name="p2choice" id="p2choice" disabled></select>
+</div>
+
+<button id="play">Play</button>
+
+<div id="result"></div>
+
+<script>
+    let play = document.getElementById("play");
+    play.addEventListener("click", playGame);
+    let players = document.getElementById("players");
+    players.addEventListener("change", changeGame);
+    let p1choice = document.getElementById("p1choice");
+    let p2choice = document.getElementById("p2choice");
+    let choices = ["rock", "paper", "scissors"];
+    for (choice of choices) {
+        let element = document.createElement("option");
+        element.value = choice;
+        element.innerHTML = choice;
+        p1choice.append(element);
+    }
+    for (choice of choices) {
+        let element = document.createElement("option");
+        element.value = choice;
+        element.innerHTML = choice;
+        p2choice.append(element);
+    }
+    function playGame(event){
+        let p1value = p1choice.value;
+        let p2value;
+        if (p2choice.disabled === false) {
+            p2value = p2choice.value;
+        }
+        else {
+            p2value = choices[Math.floor(Math.random()*choices.length)];
+        }
+    }
+    function changeGame(event){
+        if (players.value === "1") {
+            p2choice.disabled = true;
+        }
+        else {
+            p2choice.disabled = false;
+        }
+    }
+</script>
+</body>
+</html>
