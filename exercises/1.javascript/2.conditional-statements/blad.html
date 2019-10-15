@@ -1,10 +1,15 @@
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="resources/bss.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Rock, paper, scissors, ...</title>
 </head>
 <body>
+  <div class="lol">
+
+
 <h1>Rock, Paper, Scissors....</h1>
 <h2>Lizard, Spock!</h2>
 
@@ -30,36 +35,55 @@
 
 <div id="result"></div>
 
+<div class="score">
+<p id="P1"></p>
+<p>-</p>
+<p id=P2></p>
+</div>
+
+  </div>
+
 <script>
     let play = document.getElementById("play");
+    //  returns reference of button with id play
     play.addEventListener("click", playGame);
+    //when you click the button the function playGame executes
     let players = document.getElementById("players");
     players.addEventListener("change", changeGame);
+    // executes changeGame depending on 1 or 2players
     let p1choice = document.getElementById("p1choice");
     let p2choice = document.getElementById("p2choice");
+    //registers which choice the players made
     let choices = ["rock", "paper", "scissors"];
     for (choice of choices) {
         let element = document.createElement("option");
         element.value = choice;
         element.innerHTML = choice;
         p1choice.append(element);
+
     }
+    //defines p1choice
     for (choice of choices) {
         let element = document.createElement("option");
         element.value = choice;
         element.innerHTML = choice;
         p2choice.append(element);
+
     }
+    //defines p2choice
     function playGame(event){
         let p1value = p1choice.value;
         let p2value;
         if (p2choice.disabled === false) {
             p2value = p2choice.value;
+            result(p1value,p2value);
         }
         else {
             p2value = choices[Math.floor(Math.random()*choices.length)];
+            result(p1value,p2value);
         }
     }
+    //plays game with p2 or computer
     function changeGame(event){
         if (players.value === "1") {
             p2choice.disabled = true;
@@ -68,6 +92,40 @@
             p2choice.disabled = false;
         }
     }
+    //enables or disables p2choice
+
+    function result(p1, p2){
+      if (p1===p2) {
+        document.getElementById('result').innerHTML='It is a draw!';
+      }
+      if (p1==='rock') {
+        if (p2==='paper') {
+          document.getElementById('result').innerHTML= 'Player 2 wins!' ;
+        }
+        else if (p2==='scissors') {
+          document.getElementById('result').innerHTML= 'Player 1 wins'
+        }
+        }
+        if (p1==='paper') {
+          if (p2==='scissors') {
+            document.getElementById('result').innerHTML= 'Player 2 wins!' ;
+          }
+          else if (p2==='rock') {
+            document.getElementById('result').innerHTML= 'Player 1 wins'
+          }
+          }
+          if (p1==='scissors') {
+            if (p2==='rock') {
+              document.getElementById('result').innerHTML= 'Player 2 wins!' ;
+            }
+            else if (p2==='paper') {
+              document.getElementById('result').innerHTML= 'Player 1 wins'
+            }
+            }
+
+        }
+
+
 </script>
 </body>
 </html>
