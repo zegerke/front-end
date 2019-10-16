@@ -36,14 +36,16 @@
 <div id="result"></div>
 
 <div class="score">
-<p id="P1"></p>
+<p id="P1">O</p>
 <p>-</p>
-<p id=P2></p>
+<p id=P2>O</p>
 </div>
-
+<button type="button" name="button" id="reset" onclick="rel">reset score</button>
   </div>
 
 <script>
+var P1wins= 0;
+var P2wins=0;
     let play = document.getElementById("play");
     //  returns reference of button with id play
     play.addEventListener("click", playGame);
@@ -77,10 +79,12 @@
         if (p2choice.disabled === false) {
             p2value = p2choice.value;
             result(p1value,p2value);
+            score();
         }
         else {
             p2value = choices[Math.floor(Math.random()*choices.length)];
             result(p1value,p2value);
+            score();
         }
     }
     //plays game with p2 or computer
@@ -103,28 +107,39 @@
           document.getElementById('result').innerHTML= 'Player 2 wins!' ;
         }
         else if (p2==='scissors') {
-          document.getElementById('result').innerHTML= 'Player 1 wins'
+          document.getElementById('result').innerHTML= 'Player 1 wins!'
         }
         }
-        if (p1==='paper') {
+      if (p1==='paper') {
           if (p2==='scissors') {
             document.getElementById('result').innerHTML= 'Player 2 wins!' ;
           }
           else if (p2==='rock') {
-            document.getElementById('result').innerHTML= 'Player 1 wins'
+            document.getElementById('result').innerHTML= 'Player 1 wins!'
           }
           }
-          if (p1==='scissors') {
+      if (p1==='scissors') {
             if (p2==='rock') {
               document.getElementById('result').innerHTML= 'Player 2 wins!' ;
             }
             else if (p2==='paper') {
-              document.getElementById('result').innerHTML= 'Player 1 wins'
+              document.getElementById('result').innerHTML= 'Player 1 wins!'
             }
             }
-
         }
 
+        function score() {
+
+        switch (document.getElementById('result').innerHTML) {
+          case 'Player 1 wins!':
+          document.getElementById("P1").innerHTML= ++P1wins;
+            break;
+          case 'Player 2 wins!':
+          document.getElementById("P2").innerHTML= ++P2wins;
+
+        }
+        console.log(P1wins, P2wins);
+      }
 
 </script>
 </body>

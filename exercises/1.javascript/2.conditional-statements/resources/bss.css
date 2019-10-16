@@ -13,4 +13,8 @@ body {
   margin: 5px 10px 5px 10px;
 }
 
+.score p {
+  display: inline;
+}
+
 /*# sourceMappingURL=bss.css.map */
