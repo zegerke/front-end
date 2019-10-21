@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playing Field</title>
+
+    <style>
+
+        html, body{
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        button {
+            margin: 20px
+        }
+
+        #field {
+            width: 400px;
+            height: 400px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .cell {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bgblack {
+            background-color: black;
+            color: white;
+
+        }
+
+    </style>
+</head>
+<body>
+
+<div>
+    <button id="generate">Generate</button>
+    <button id="random">Randomize!</button>
+</div>
+
+<div id="field"></div>
+
+
+<script>
+
+    let field = document.getElementById("field");
+
+    let standard = document.getElementById("generate");
+    standard.addEventListener("click", generateField);
+
+    let random = document.getElementById("random");
+    random.addEventListener("click", makeRandom)
+
+    function generateField() {
+      var i;
+      for(i = 0; i < 101 ; i++){
+        if (i%2 == 0) {
+          var div = document.createElement('div');
+          div.textcontent= "how";
+          div.setAttribute('class','cell');
+          document.getElementById("field").appendChild(div);
+        }
+        else {
+          var div = document.createElement('div');
+          div.innertext = "why " ;
+          div.setAttribute('class','cell bgblack');
+          document.getElementById("field").appendChild(div);
+
+        }
+      }
+    }
+
+    function makeRandom() {
+        /*
+        Write your code here to randomize the colors.
+        You could do this for example by making some classes in CSS with different color schemes,
+        and then asigning a random one to each cell.
+        */
+    }
+
+    function reset() {
+        field.innerHTML = "";
+    }
+
+</script>
+
+</body>
+</html>

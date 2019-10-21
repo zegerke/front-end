@@ -56,7 +56,7 @@ var P2wins=0;
     let p1choice = document.getElementById("p1choice");
     let p2choice = document.getElementById("p2choice");
     //registers which choice the players made
-    let choices = ["rock", "paper", "scissors"];
+    let choices = ["rock", "paper", "scissors", "lizard","spock"];
     for (choice of choices) {
         let element = document.createElement("option");
         element.value = choice;
@@ -107,7 +107,13 @@ var P2wins=0;
           document.getElementById('result').innerHTML= 'Player 2 wins!' ;
         }
         else if (p2==='scissors') {
-          document.getElementById('result').innerHTML= 'Player 1 wins!'
+          document.getElementById('result').innerHTML= 'Player 1 wins!';
+        }
+        else if (p2=='spock'){
+          document.getElementById('result').innerHTML= 'Player 2 wins!';
+        }
+        else if (p2=='lizard'){
+          document.getElementById('result').innerHTML= 'Player 1 wins!';
         }
         }
       if (p1==='paper') {
@@ -115,18 +121,58 @@ var P2wins=0;
             document.getElementById('result').innerHTML= 'Player 2 wins!' ;
           }
           else if (p2==='rock') {
-            document.getElementById('result').innerHTML= 'Player 1 wins!'
+            document.getElementById('result').innerHTML= 'Player 1 wins!';
           }
+          else if (p2=='spock'){
+            document.getElementById('result').innerHTML= 'Player 1 wins!';
           }
+          else if (p2=='lizard'){
+            document.getElementById('result').innerHTML= 'Player 2 wins!';
+          }
+        }
       if (p1==='scissors') {
             if (p2==='rock') {
               document.getElementById('result').innerHTML= 'Player 2 wins!' ;
             }
             else if (p2==='paper') {
-              document.getElementById('result').innerHTML= 'Player 1 wins!'
+              document.getElementById('result').innerHTML= 'Player 1 wins!';
+            }
+            else if (p2=='spock'){
+              document.getElementById('result').innerHTML= 'Player 2 wins!';
+            }
+            else if (p2=='lizard'){
+              document.getElementById('result').innerHTML= 'Player 1 wins!';
             }
             }
-        }
+      if (p1==='lizard') {
+            if (p2==='rock') {
+              document.getElementById('result').innerHTML= 'Player 2 wins!' ;
+            }
+            else if (p2==='paper') {
+              document.getElementById('result').innerHTML= 'Player 1 wins!';
+            }
+            else if (p2=='spock'){
+              document.getElementById('result').innerHTML= 'Player 1 wins!';
+            }
+            else if (p2=='scissors'){
+              document.getElementById('result').innerHTML= 'Player 2 wins!';
+            }
+            }
+      if (p1==='spock') {
+           if (p2==='rock') {
+              document.getElementById('result').innerHTML= 'Player 1 wins!' ;
+           }
+           else if (p2==='paper') {
+            document.getElementById('result').innerHTML= 'Player 2 wins!';
+           }
+           else if (p2=='scissors'){
+            document.getElementById('result').innerHTML= 'Player 1 wins!';
+          }
+           else if (p2=='lizard'){
+            document.getElementById('result').innerHTML= 'Player 2 wins!';
+          }
+          }
+      }
 
         function score() {
 
@@ -138,7 +184,6 @@ var P2wins=0;
           document.getElementById("P2").innerHTML= ++P2wins;
 
         }
-        console.log(P1wins, P2wins);
       }
 
 </script>
