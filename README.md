@@ -1,3 +1,3 @@
 # front-end
 hey
-[Navigation](https://zegerke.github.io/learning-front-end/index.html)
+[Navigation](https://zegerke.github.io/front-end/index.html)
