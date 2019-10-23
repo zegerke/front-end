@@ -228,13 +228,12 @@
           let letters = ["A","B","C","D","E","F","G","H","I","J"]
           var row = Math.ceil(i/10);
           let min = row-1;
-          let ten = min*10;
-          let one = ten+1;
+          let ten = (i-(min*10))-1;
+          let one = ten+1
           console.log(one,ten)
-          if (i>=1) {
-            let letter = letters.slice(ten,one)
-            document.getElementById(i).innerHTML=letter+row
-          }
+          let letter = letters.slice(ten,one)
+          document.getElementById(i).innerHTML=letter+row
+
 
 
 

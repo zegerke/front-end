@@ -1,0 +1,47 @@
+html,body,p,div,ul{
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+
+#image{
+width:150px;
+height:150px
+}
+#name{
+  text-transform: capitalize;
+}
+body{
+  text-align: center;
+  }
+.search{
+  background-color: #ff0000;
+  padding: 10px 10px;
+}
+.mid{
+  background-image:url(bg.png) ;
+  background-size: cover;
+  height: calc(100vh - 161px);
+  padding: 0 150px ;
+}
+.botlist{
+  height: 100px;
+  background-color: #ff0000;
+  overflow-x: scroll;
+  padding: 10px 100px;
+}
+#list{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style: none;
+  text-transform: capitalize;
+}
+#listbut{
+  display: none;
+}
+li{
+  margin: 0 5px;
+}
+::-webkit-scrollbar {
+    display: none;
+}

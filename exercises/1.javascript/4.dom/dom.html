@@ -1,20 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="resources/dom.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokedex</title>
 </head>
 <body>
+<div class="search">
+  <input type="text" id="pokesearch" name="pokesearch" placeholder="Pikachu">
+  <label for="pokesearch"><button id="search">Search!</button></label>
 
-<a href="#"></a>
-    <input type="text" id="pokesearch" name="pokesearch" placeholder="Pikachu">
-    <label for="pokesearch"><button id="search">Search!</button></label>
+  <button id="previous">&lt;</button>
+  <button id="next">&gt;</button>
+  <button id="listbut" >List</button>
+</div>
 
-    <button id="previous">&lt;</button>
-    <button id="next">&gt;</button>
+<div class="mid">
+  <img src="" id="image" alt="">
+  <br>
+  <h1 id="name"></h1>
+  <p id="id"></p>
+  <br>
+  <p id="moves"></p>
+  <br>
+  <p id="abilities"></p>
+  <br>
+  <p id="weight"></p>
+</div>
 
-    <ul id="list"></ul>
+<div class="botlist">
+  <ul id="list"></ul>
+</div>
+
 
     <script>
         /*==================================================================================================
@@ -27,6 +45,7 @@
         let previous = document.getElementById("previous");
         let next = document.getElementById("next");
         let list = document.getElementById("list");
+        let listbut = document.getElementById('listbut')
         let pokemon_name;
         let pokemon_id;
         let pokemon_moves;
@@ -54,6 +73,7 @@
             }
             LoadPokemon(++pokemon_id);
         })
+      listbut.addEventListener("click",LoadPokemonList());
         //Function that looks up the data for a pokemon when it's given the pokemon's name or id number.
         function LoadPokemon(pokemon){
             let request = new XMLHttpRequest();
@@ -77,6 +97,7 @@
             else {
                 console.log("Data found!")
                 pokemon_name = data.name;
+                console.log(pokemon_name);
                 pokemon_id = data.id;
                 pokemon_moves = data.moves.map(x => x.move.name);
                 pokemon_abilities = data.abilities.map(x => x.ability.name);
@@ -119,18 +140,12 @@
         ======================================== Magic Ends Here! ==========================================
         ==================================================================================================*/
         function DoThingsWithTheDom() {
-            /*
-            Write your code here!
-            The following variables contain data for you to use. Be careful with the data types (some are numbers, some are strings and some are arrays)!
-                pokemon_name
-                pokemon_id
-                pokemon_moves
-                pokemon_abilities
-                pokemon_image
-                pokemon_weight
-            The goal of the exercise is for you to display this information in your HTML.
-            You can do this by placing empty tags in your HTML, and the assigning their content with JS.
-            But you can also generate the HTML with document.createElement().
-            */
+          document.getElementById('name').innerHTML=pokemon_name ;
+          document.getElementById('id').innerHTML="#"+pokemon_id ;
+          document.getElementById('moves').innerHTML=pokemon_moves ;
+          document.getElementById('abilities').innerHTML=pokemon_abilities ;
+          document.getElementById('image').src=pokemon_image;
+          document.getElementById('weight').innerHTML=(pokemon_weight/10)+"kg";
+          LogPokeData();
         }
     </script>
