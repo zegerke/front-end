@@ -183,20 +183,23 @@
     var i;
 
     function generateField() {
-
+      field.innerHTML = "";
       for(i =1 ; i <= 100 ; i++){
+        var row = Math.ceil(i/10);
           var square = document.createElement('div');
           square.innerHTML = i;
           square.classList.add("cell");
           square.setAttribute("id",i);
           field.append(square);
-        if ((i >= 11 && i <= 20)||(i >= 31 && i <= 40)||(i >= 51 && i <= 60)||(i >= 71 && i <= 80)||(i >= 91 && i <= 100)) {
+
+
+        if (row%2!==0) {
           if (i%2==0) {
           square.classList.add("bgblack");
           }
             }
             else {
-              if (i%2==1) {
+              if (i%2 !==0) {
                 square.classList.add("bgblack");
               }
         }
@@ -223,47 +226,16 @@
     function getco(){
         for ( i = 1; i <= 100 ; i++){
           let letters = ["A","B","C","D","E","F","G","H","I","J"]
+          var row = Math.ceil(i/10);
+          let min = row-1;
+          let ten = min*10;
+          let one = ten+1;
+          console.log(one,ten)
+          if (i>=1) {
+            let letter = letters.slice(ten,one)
+            document.getElementById(i).innerHTML=letter+row
+          }
 
-          if (i>=1 && i<=10) {
-            let letter = letters.slice(i-1,i)
-            document.getElementById(i).innerHTML=letter+1
-          }
-          else if (i>=11 && i<=20) {
-            let letter = letters.slice(i-11,i-10)
-            document.getElementById(i).innerHTML=letter+2
-          }
-          else if (i>=21 && i<=30) {
-            let letter = letters.slice(i-21,i-20)
-            document.getElementById(i).innerHTML=letter+3
-          }
-          else if (i>=31 && i<=40) {
-            let letter = letters.slice(i-31,i-30)
-            document.getElementById(i).innerHTML=letter+4
-          }
-          else if (i>=41 && i<=50) {
-            let letter = letters.slice(i-41,i-40)
-            document.getElementById(i).innerHTML=letter+5
-          }
-          else if (i>=51 && i<=60) {
-            let letter = letters.slice(i-51,i-50)
-            document.getElementById(i).innerHTML=letter+6
-          }
-          else if (i>=61 && i<=70) {
-            let letter = letters.slice(i-61,i-60)
-            document.getElementById(i).innerHTML=letter+7
-          }
-          else if (i>=71 && i<=80) {
-            let letter = letters.slice(i-71,i-70)
-            document.getElementById(i).innerHTML=letter+8
-          }
-          else if (i>=81 && i<=90) {
-            let letter = letters.slice(i-81,i-80)
-            document.getElementById(i).innerHTML=letter+9
-          }
-          else if (i>=91 && i<=100) {
-            let letter = letters.slice(i-91,i-90)
-            document.getElementById(i).innerHTML=letter+10
-          }
 
 
 
