@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <link rel="stylesheet" href="resources/dom.css">
+  <script src="https://kit.fontawesome.com/772742ad19.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokedex</title>
@@ -13,7 +14,7 @@
 
   <button id="previous">&lt;</button>
   <button id="next">&gt;</button>
-  <button id="listbut" >List</button>
+
 </div>
 
 <div class="mid">
@@ -27,6 +28,8 @@
   <p id="abilities"></p>
   <br>
   <p id="weight"></p>
+  <br>
+  <p class="bottom">All Pokemons <i class="fas fa-sort-down"></i></p>
 </div>
 
 <div class="botlist">
@@ -45,7 +48,6 @@
         let previous = document.getElementById("previous");
         let next = document.getElementById("next");
         let list = document.getElementById("list");
-        let listbut = document.getElementById('listbut')
         let pokemon_name;
         let pokemon_id;
         let pokemon_moves;
@@ -73,7 +75,6 @@
             }
             LoadPokemon(++pokemon_id);
         })
-      listbut.addEventListener("click",LoadPokemonList());
         //Function that looks up the data for a pokemon when it's given the pokemon's name or id number.
         function LoadPokemon(pokemon){
             let request = new XMLHttpRequest();
@@ -136,6 +137,7 @@
             , "\n" + "Image URL: " + pokemon_image
             + "\n" + "Weight: " + pokemon_weight);
         }
+        window.onload = LoadPokemonList
         /*==================================================================================================
         ======================================== Magic Ends Here! ==========================================
         ==================================================================================================*/
@@ -143,9 +145,9 @@
           document.getElementById('name').innerHTML=pokemon_name ;
           document.getElementById('id').innerHTML="#"+pokemon_id ;
           document.getElementById('moves').innerHTML=pokemon_moves ;
-          document.getElementById('abilities').innerHTML=pokemon_abilities ;
+          document.getElementById('abilities').innerHTML="Abilites : "+pokemon_abilities ;
           document.getElementById('image').src=pokemon_image;
-          document.getElementById('weight').innerHTML=(pokemon_weight/10)+"kg";
+          document.getElementById('weight').innerHTML="Weight : "+(pokemon_weight/10)+"kg";
           LogPokeData();
         }
     </script>
