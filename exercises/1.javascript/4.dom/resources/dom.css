@@ -36,6 +36,7 @@ height:150px
 }
 body{
   text-align: center;
+  font-style: 'pixel', Helvetica, Arial, sans-serif;
   }
 .search{
   background-color:#357AAA;
@@ -60,7 +61,11 @@ body{
   list-style: none;
   text-transform: capitalize;
 }
+#moves{
+  max-height: 200px;
+  overflow-y: scroll;
 
+}
 li{
   margin: 0 5px;
 }
@@ -77,3 +82,9 @@ li:hover{
   right: auto;
   left: auto;
 }
+@font-face {
+    font-family: 'pixel';
+    src:url(pixel.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
