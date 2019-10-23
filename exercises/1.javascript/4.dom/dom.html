@@ -23,10 +23,13 @@
   <h1 id="name"></h1>
   <p id="id"></p>
   <br>
+  <h3 id="oves"></h3>
   <p id="moves"></p>
   <br>
+  <h3 id="bilities"></h3>
   <p id="abilities"></p>
   <br>
+  <h3 id="eight"></h3>
   <p id="weight"></p>
   <br>
   <p class="bottom">All Pokemons <i class="fas fa-sort-down"></i></p>
@@ -144,10 +147,13 @@
         function DoThingsWithTheDom() {
           document.getElementById('name').innerHTML=pokemon_name ;
           document.getElementById('id').innerHTML="#"+pokemon_id ;
+          document.getElementById('oves').innerHTML="Moves : ";
           document.getElementById('moves').innerHTML=pokemon_moves ;
-          document.getElementById('abilities').innerHTML="Abilites : "+pokemon_abilities ;
+            document.getElementById('bilities').innerHTML="Abilities : ";
+          document.getElementById('abilities').innerHTML=pokemon_abilities ;
           document.getElementById('image').src=pokemon_image;
-          document.getElementById('weight').innerHTML="Weight : "+(pokemon_weight/10)+"kg";
+            document.getElementById('eight').innerHTML="Weight : ";
+          document.getElementById('weight').innerHTML=(pokemon_weight/10)+"kg";
           LogPokeData();
         }
     </script>
