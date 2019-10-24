@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+
+    <style>
+
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+        ul {
+            list-style-type: none;
+        }
+        button {
+            width: 40px;
+            height: 40px;
+        }
+        #calculator {
+            width: 300px;
+            height: 350px;
+            background-color: lightblue;
+            margin: 50px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly
+        }
+        #calc-preview {
+            width: 90%;
+            height: 100px;
+            background-color: aliceblue;
+            color: gray;
+            text-align: right;
+        }
+        #calc-buttons {
+            width: 90%;
+            height: 200px;
+            display: flex;
+            justify-content: space-between;
+        }
+        #calc-numbers {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        #operations {
+            width: 40%;
+            height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+        }
+        .hovering {
+            border-color: hotpink;
+            border-width: 3px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div id="calculator">
+
+        <div id="calc-preview">0</div>
+
+        <div id="calc-buttons">
+
+            <ul id="calc-numbers">
+                <button>7</button>
+                <button>8</button>
+                <button>9</button>
+                <button>4</button>
+                <button>5</button>
+                <button>6</button>
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>0</button>
+            </ul>
+
+            <div id="operations">
+                <button>+</button>
+                <button>-</button>
+                <button>*</button>
+                <button>/</button>
+                <button>%</button>
+                <button>=</button>
+                <button>C</button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+      //buttons
+      const numbers = document.querySelectorAll("#calc-numbers > button");
+      const operations= document.querySelectorAll("#operations > button");
+      let display = document.getElementById('calc-preview');
+      let content = "";
+      let x = "";
+      let operator = "";
+
+      numbers.forEach(number =>{
+        number.addEventListener("click", function(){
+          Getnumber(number);
+        })
+      });
+
+    for (let i = 0; i < 5; i++) {
+      operations[i].addEventListener("click", function(){
+        x = display.innerHTML;
+        operator = operations[i].innerHTML;
+        display.innerHTML += operator;
+        console.log(x,operator);
+      })
+    }
+
+      operations[5].addEventListener("click",Result);
+      operations[6].addEventListener("click",Clean);
+
+      //screen
+
+      function Getnumber(number){
+        if (display.innerHTML == "0"){
+          display.innerHTML = "";
+          display.innerHTML = number.innerHTML;
+        }
+        else{
+          content=display.innerHTML;
+          display.innerHTML= content+number.innerHTML;
+        }
+      };
+
+      function Clean() {
+        x="";
+        operator="";
+        display.innerHTML="";
+      };
+
+      function Result(){
+        switch (operator) {
+              case "+":
+                  display.innerHTML = (parseFloat(x) + parseFloat(display.innerHTML));
+                  break;
+              case "-":
+                  display.innerHTML = (parseFloat(x) - parseFloat(display.innerHTML));
+                  break;
+              case "/":
+                  display.innerHTML =(parseFloat(x) / parseFloat(display.innerHTML));
+                  break;
+              case "*":
+                  display.innerHTML =(parseFloat(x) * parseFloat(display.innerHTML));
+                  break;
+              case "%":
+                  display.innerHTML =(parseFloat(x) % parseFloat(display.innerHTML));
+              default:
+                  display.innerHTML = "";
+          };
+      };
+    </script>
+
+</body>
+</html>
