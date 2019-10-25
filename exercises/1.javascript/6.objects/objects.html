@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>family</title>
+    <style>
+    #familyid{
+      display: flex;
+      flex-flow: row;
+      justify-content: space-around;
+    }
+    #list{
+      text-align: center;
+      list-style: none;
+    }
+    img{
+      height: 100px;
+    }
+    </style>
+  </head>
+  <body>
+<div >
+  <ul id="list">
+  </ul>
+</div>
+<div id="familyid">
+
+</div>
+
+  </body>
+  <script>
+    let aboutme ={
+      name: "Zeger Kenis",
+      age:"23",
+      gender:"Male",
+      favoritefood: "Steak",
+      favoriteseries: "Seinfeld",
+      favoritemovie:"Oldboy",
+      single: "yes",
+    };
+    let myvalues= Object.values(aboutme);
+    let mykeys= Object.keys(aboutme);
+    let list = document.getElementById('list');
+
+    for (var i = 0; i <= 6 ; i++) {
+      let lis = document.createElement("li");
+      lis.innerHTML= (mykeys[i]+" : "+myvalues[i]);
+      list.append(lis)
+    };
+    let myfamily=[]
+function FamilyMember(name,age,gender,image){
+  this.Name = name;
+  this.Age = age;
+  this.Gender = gender;
+  this.image = image;
+  myfamily.push(this)
+};
+
+console.dir(myfamily);
+let dad = new FamilyMember("Jo Kenis","58","Male","image.png");
+let mom = new FamilyMember("Ann Vanbaelen","52","Female","image1.jpg");
+let sister = new FamilyMember("Merel Kenis","21","Female","image2.jpg");
+
+
+for (var k = 0; k < myfamily.length; k++) {
+  var card = document.createElement("ul");
+  let familyid= document.getElementById('familyid');
+  var famkeys = Object.keys(myfamily[k]);
+  var famvalues = Object.values(myfamily[k]);
+
+  let image = document.createElement("img");
+  image.src = famvalues[3];
+  image.setAttribute("id","img"+k)
+  card.append(image);
+
+  for (var j = 0; j < 3; j++) {
+
+    var info = document.createElement("li");
+    info.innerHTML =(famkeys[j]+" : "+famvalues[j]);
+    card.appendChild(info);
+  }
+  let butt = document.createElement("button");
+  butt.setAttribute("id","btn"+k);
+  butt.innerHTML= "Click me!";
+//  butt.setAttribute("onClick",function(){
+  //  lol()
+    //  document.getElementById('"img"+1').style.visibility==hidden;
+    //}
+  
+  card.append(butt);
+
+ familyid.appendChild(card);
+}
+  </script>
+</html>

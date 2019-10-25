@@ -110,7 +110,9 @@
       let content = "";
       let x = "";
       let operator = "";
-
+      const buttons = document.getElementsByTagName('button');
+      
+      console.dir(buttons);
       numbers.forEach(number =>{
         number.addEventListener("click", function(){
           Getnumber(number);
