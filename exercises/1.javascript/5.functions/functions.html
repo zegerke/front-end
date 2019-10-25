@@ -117,15 +117,15 @@
         })
       });
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 4; i++) {
       operations[i].addEventListener("click", function(){
         x = display.innerHTML;
         operator = operations[i].innerHTML;
-        display.innerHTML += operator;
+        display.innerHTML = "";
         console.log(x,operator);
       })
     }
-
+      operations[4].addEventListener("click",Percent);
       operations[5].addEventListener("click",Result);
       operations[6].addEventListener("click",Clean);
 
@@ -147,7 +147,9 @@
         operator="";
         display.innerHTML="";
       };
-
+      function Percent() {
+        display.innerHTML /=  100;
+      };
       function Result(){
         switch (operator) {
               case "+":
@@ -162,8 +164,6 @@
               case "*":
                   display.innerHTML =(parseFloat(x) * parseFloat(display.innerHTML));
                   break;
-              case "%":
-                  display.innerHTML =(parseFloat(x) % parseFloat(display.innerHTML));
               default:
                   display.innerHTML = "";
           };
