@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="resources/ajax.css">
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <button id="button">Get quote</button>
+      <div class="quotemain">
+        <p id="quotehere"></p>
+        <p id="authorhere"></p>
+      </div>
+    </div>
+    <script>
+
+      document.getElementById('button').addEventListener("click",Loadtext);
+
+      function Loadtext(){
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET',"https://thatsthespir.it/api",true);
+
+        xhr.onload = function(){
+          if(this.status == 200){
+            var quoteitem = JSON.parse(this.responseText);
+            document.getElementById('quotehere').innerHTML = quoteitem.quote;
+            document.getElementById('authorhere').innerHTML = quoteitem.author;
+          }
+          else {
+            document.getElementById('quotehere').innerHTML = "ERRORàç!è"
+          }
+        }
+        xhr.send();
+      }
+    </script>
+  </body>
+</html>
