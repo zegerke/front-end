@@ -11,6 +11,7 @@
       <div class="quotemain">
         <p id="quotehere"></p>
         <p id="authorhere"></p>
+        <img id="pichere"src="" alt="">
       </div>
     </div>
     <script>
@@ -25,7 +26,8 @@
           if(this.status == 200){
             var quoteitem = JSON.parse(this.responseText);
             document.getElementById('quotehere').innerHTML = quoteitem.quote;
-            document.getElementById('authorhere').innerHTML = quoteitem.author;
+            document.getElementById('authorhere').innerHTML ="~" + quoteitem.author;
+            document.getElementById('pichere').src = quoteitem.photo;
           }
           else {
             document.getElementById('quotehere').innerHTML = "ERRORàç!è"
