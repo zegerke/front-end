@@ -53,6 +53,7 @@ function FamilyMember(name,age,gender,image){
   this.Age = age;
   this.Gender = gender;
   this.image = image;
+  
   myfamily.push(this)
 };
 
@@ -79,16 +80,6 @@ for (var k = 0; k < myfamily.length; k++) {
     info.innerHTML =(famkeys[j]+" : "+famvalues[j]);
     card.appendChild(info);
   }
-  let butt = document.createElement("button");
-  butt.setAttribute("id","btn"+k);
-  butt.innerHTML= "Click me!";
-//  butt.setAttribute("onClick",function(){
-  //  lol()
-    //  document.getElementById('"img"+1').style.visibility==hidden;
-    //}
-
-  card.append(butt);
-
  familyid.appendChild(card);
 }
   </script>
