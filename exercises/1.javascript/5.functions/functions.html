@@ -111,7 +111,7 @@
       let x = "";
       let operator = "";
       const buttons = document.getElementsByTagName('button');
-      
+
       console.dir(buttons);
       numbers.forEach(number =>{
         number.addEventListener("click", function(){
@@ -170,6 +170,16 @@
                   display.innerHTML = "";
           };
       };
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener("mouseover",function(event){
+          event.target.classList.add("hovering");
+          },false)
+        buttons[i].addEventListener("mouseout",function(event){
+          event.target.classList.remove("hovering");
+        },false)
+      }
+      
+
     </script>
 
 </body>
