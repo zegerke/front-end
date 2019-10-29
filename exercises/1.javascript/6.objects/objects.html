@@ -47,13 +47,34 @@
       lis.innerHTML= (mykeys[i]+" : "+myvalues[i]);
       list.append(lis)
     };
+
+
     let myfamily=[]
 function FamilyMember(name,age,gender,image){
+  let photo = document.createElement("img");
+  photo.src = image;
+
+  let btn = document.createElement("button");
+  btn.innerHTML = "Click me";
+  btn.addEventListener ("click", showHide);
+
+  function showHide (event) {
+      if (photo.style.visibility == "visible") {
+          photo.style.visibility = "hidden";
+      } else {
+          photo.style.visibility = "visible";
+      }
+  }
+  showHide();
+  this.picture = photo;
   this.Name = name;
   this.Age = age;
   this.Gender = gender;
-  this.image = image;
-  
+  this.button = btn;
+  this.showHide = function(){
+    showHide();
+  };
+
   myfamily.push(this)
 };
 
@@ -69,17 +90,14 @@ for (var k = 0; k < myfamily.length; k++) {
   var famkeys = Object.keys(myfamily[k]);
   var famvalues = Object.values(myfamily[k]);
 
-  let image = document.createElement("img");
-  image.src = famvalues[3];
-  image.setAttribute("id","img"+k)
-  card.append(image);
-
-  for (var j = 0; j < 3; j++) {
+  card.appendChild(famvalues[0])
+  for (var j = 1; j < 4; j++) {
 
     var info = document.createElement("li");
     info.innerHTML =(famkeys[j]+" : "+famvalues[j]);
     card.appendChild(info);
   }
+  card.appendChild(famvalues[4])
  familyid.appendChild(card);
 }
   </script>
