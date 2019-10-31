@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang=" " dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Form</title>
+  </head>
+  <body>
+    <form id='form'>
+      <fieldset>
+        <legend>Registration</legend>
+        <h1>Required</h1><br>
+        First Name: <input id="firstname" type="text" required><br>
+        Last Name: <input id="lastname" type="text" required><br>
+        Username: <input id="username" type="text" required><br>
+        Email: <input id="email" type="email" required><br>
+        Password: <input id="password" type="password" required><br>
+        Confirm Password: <input id="confirmpassword" type="password" required><br>
+        Adress: <input id="adress" type="text" required><br>
+        City: <input id="city" type="text" required><br>
+        Zip: <input id="zip" type="number" required><br>
+        <h1>Optional</h1>
+        Phone number: <input id="phonenumber" type="number"><br>
+        Age: <input id="age" type="number"><br>
+        Hobbies: <input id="hobbies" type="text"><br>
+        <input id="Submit" type="button"  value="Submit" onsubmit="return checkform()">
+      </fieldset>
+    </form>
+  </body>
+  <script>
+
+    var user = JSON.parse(localStorage.getItem('user'));
+    console.log(user);
+
+    document.getElementById('Submit').addEventListener('click',saveform);
+    function saveform(){
+      let person = {
+        firstname : document.getElementById('firstname').value,
+        lastname : document.getElementById('lastname').value,
+        username : document.getElementById('username').value,
+        email : document.getElementById('email').value,
+        password : document.getElementById('password').value,
+        confirmpassword : document.getElementById('confirmpassword').value,
+        adress : document.getElementById('adress').value,
+        city : document.getElementById('city').value,
+        zip : document.getElementById('zip').value,
+        phonenumber : document.getElementById('phonenumber').value,
+        age : document.getElementById('age').value,
+        hobbies : document.getElementById('hobbies').value,
+      }
+      localStorage.setItem('user', JSON.stringify(person));
+
+    };
+    function checkform(){
+      let a = user.password.search(/\d/);
+      let b = user.email.search("@gmail.com");
+      let c =user.password.search([A-Z])
+      if ( a == (-1)) {
+        getElementById('password').style.border= "red inset 2px";
+        getElementById('confirmpassword').style.border= "red inset 2px" ;
+        getElementById('confirmpassword').value="";
+        getElementById('password').value="";
+        alert('Password needs to contain at least 1 number');
+        return false;
+      }
+      else if ( c == (-1)) {
+        getElementById('password').style.border= "red inset 2px";
+        getElementById('confirmpassword').style.border= "red inset 2px" ;
+        getElementById('confirmpassword').value="";
+        getElementById('password').value="";
+        alert('Password needs to contain at least 1 capital letter');
+        return false;
+      }
+      else if (user.password != user.confirmpassword) {
+        getElementById('password').style.border= "red inset 2px" ;
+        getElementById('confirmpassword').style.border= "red inset 2px" ;
+        getElementById('confirmpassword').value="";
+        getElementById('password').value="";
+        alert("Passwords do not match");
+        return false;
+      }
+      else if (b == (-1)) {
+        getElementById('email').style.border= "red inset 2px" ;
+        getElementById('email').value="";
+        alert("Email must be @gmail.com!");
+        return false;
+      }
+      else {
+        return true;
+        window.location.href = 'complete.html';
+      }
+    }
+  </script>
+</html>
