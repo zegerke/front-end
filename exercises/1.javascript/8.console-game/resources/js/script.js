@@ -1,4 +1,22 @@
 //**********Good luck************ */
+//music
+let musicbut = document.getElementById('music');
+let musicon = true;
+musicbut.onclick = togglemusic;
+
+function togglemusic(){
+  if (musicon == true) {
+    musicbut.innerHTML ="Music:off";
+    musicon = false;
+    document.getElementById('themeSong').pause();
+  }
+  else {
+    musicbut.innerHTML = "Music:on";
+    musicon = true;
+    document.getElementById('themeSong').play();
+  }
+};
+//game
 function Objectcreator(name,race,type,health){
   let attackaudio = new Audio('resources/sound/attack.mp3');
   let healaudio = new Audio('resources/sound/heal.mp3');
