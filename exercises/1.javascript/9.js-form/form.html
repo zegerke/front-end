@@ -30,7 +30,7 @@
   <script>
 
 
-  
+
     function saveform(){
       let person = {
         firstname : document.getElementById('firstname').value,
@@ -51,7 +51,7 @@
     };
     function checkform(){
       saveform();
-      console.log(user);
+      console.log(JSON.parse(localStorage.getItem('user')));
       var user = JSON.parse(localStorage.getItem('user'));
       let a = user.password.search(/\d/);
       let b = user.email.search("@gmail.com");
@@ -88,7 +88,9 @@
       }
       else {
         alert("Registration sucesful");
-        return true;
+        window.location.href = "complete.html";
+        return false;
+
       }
     }
   </script>
