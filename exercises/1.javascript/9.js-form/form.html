@@ -2,10 +2,11 @@
 <html lang=" " dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="resources/form.css">
     <title>Form</title>
   </head>
   <body>
-    <form id='form'>
+    <form id='form' onsubmit="return checkform();">
       <fieldset>
         <legend>Registration</legend>
         <h1>Required</h1><br>
@@ -22,16 +23,16 @@
         Phone number: <input id="phonenumber" type="number"><br>
         Age: <input id="age" type="number"><br>
         Hobbies: <input id="hobbies" type="text"><br>
-        <input id="Submit" type="button"  value="Submit" onsubmit="return checkform()">
+        <input id="Sub" type="submit"  value="Submit" >
       </fieldset>
     </form>
   </body>
   <script>
 
-    var user = JSON.parse(localStorage.getItem('user'));
-    console.log(user);
 
-    document.getElementById('Submit').addEventListener('click',saveform);
+    //console.log(user);
+
+    //document.getElementById('Sub').addEventListener('click',saveform);
     function saveform(){
       let person = {
         firstname : document.getElementById('firstname').value,
@@ -51,42 +52,45 @@
 
     };
     function checkform(){
+      saveform();
+      console.log(user);
+      var user = JSON.parse(localStorage.getItem('user'));
       let a = user.password.search(/\d/);
       let b = user.email.search("@gmail.com");
-      let c =user.password.search([A-Z])
+      let c =user.password.search(/[A-Z]/)
       if ( a == (-1)) {
-        getElementById('password').style.border= "red inset 2px";
-        getElementById('confirmpassword').style.border= "red inset 2px" ;
-        getElementById('confirmpassword').value="";
-        getElementById('password').value="";
+        document.getElementById('password').style.border= "red inset 2px";
+        document.getElementById('confirmpassword').style.border= "red inset 2px" ;
+        document.getElementById('confirmpassword').value="";
+        document.getElementById('password').value="";
         alert('Password needs to contain at least 1 number');
         return false;
       }
       else if ( c == (-1)) {
-        getElementById('password').style.border= "red inset 2px";
-        getElementById('confirmpassword').style.border= "red inset 2px" ;
-        getElementById('confirmpassword').value="";
-        getElementById('password').value="";
-        alert('Password needs to contain at least 1 capital letter');
+        document.getElementById('password').style.border= "red inset 2px";
+        document.getElementById('confirmpassword').style.border= "red inset 2px" ;
+        document.getElementById('confirmpassword').value="";
+        document.getElementById('password').value="";
+        document.alert('Password needs to contain at least 1 capital letter');
         return false;
       }
       else if (user.password != user.confirmpassword) {
-        getElementById('password').style.border= "red inset 2px" ;
-        getElementById('confirmpassword').style.border= "red inset 2px" ;
-        getElementById('confirmpassword').value="";
-        getElementById('password').value="";
+        document.getElementById('password').style.border= "red inset 2px" ;
+        document.getElementById('confirmpassword').style.border= "red inset 2px" ;
+        document.getElementById('confirmpassword').value="";
+        document.getElementById('password').value="";
         alert("Passwords do not match");
         return false;
       }
       else if (b == (-1)) {
-        getElementById('email').style.border= "red inset 2px" ;
-        getElementById('email').value="";
+        document.getElementById('email').style.border= "red inset 2px" ;
+        document.getElementById('email').value="";
         alert("Email must be @gmail.com!");
         return false;
       }
       else {
+        alert("Registration sucesful");
         return true;
-        window.location.href = 'complete.html';
       }
     }
   </script>

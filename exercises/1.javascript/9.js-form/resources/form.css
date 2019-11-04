@@ -1,0 +1,16 @@
+body{
+  text-align: center;
+  margin: 10px 100px;
+}
+input{
+  margin-top: 5px;
+  margin-left: 10px;
+}
+fieldset{
+  border-radius: 10px;
+  background-color: lightgray;
+}
+legend{
+  font-size: 30px;
+  font-weight: bold;
+}
