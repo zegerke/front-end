@@ -132,16 +132,16 @@
       operations[6].addEventListener("click",Clean);
       //key events
       document.addEventListener('keypress',(event)=>{
-        keypress= event.key;
+        let keypress= event.key;
         if ((display.innerHTML == "0")||(display.innerHTML == "NaN")) {
           display.innerHTML="";
           if (isFinite(keypress)== true) {
           display.innerHTML += keypress;
         }
         }
-        else {
-          display.innerHTML+= keypress;
-        }
+        if (isFinite(keypress)== true) {
+        display.innerHTML += keypress;
+      }
       })
 
 

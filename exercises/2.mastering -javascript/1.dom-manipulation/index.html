@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fix me!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
+    <link rel="stylesheet" href="stylesheet.css">
+
+</head>
+<body class="bg-dark pt-4">
+<div id="exercisesHolder" class="container">
+
+    <!-- Part 0: The Rules -->
+    <div class="row">
+        <div class="col-12 bg-white shadow-sm p-4 mx-auto mt-4 border">
+            <h3>Part 0: The Rules</h3>
+            <p>In this exercise, you will go over the different blocks, read the instructions and apply the necessary javascript code to get to the result.
+                <br>You are not allowed to write anything outside the script tags provided. So keep your code in there!</p>
+
+            <h5>How to do these exercies:</h5>
+            <ul>
+                <li>Read the instructions (Above the line)</li>
+                <li>Apply these instructions on the content (Below the line)</li>
+                <li>Do the <span class="bonus">bonus</span> items if you wish to challenge yourself some more</li>
+            </ul>
+        </div>
+    </div>
+    <!-- END OF Part 0 -->
+
+
+    <!-- Part 1: Interaction with inputs -->
+    <div class="row">
+        <div class="col-12 bg-white shadow-sm p-4 mx-auto mt-4">
+            <h3>Part 1: Interaction with inputs</h3>
+            <p>Below this, you have an input, here's what you need to do:
+            <ul>
+                <li>When you type something in the greetingsBox, The bordered box should fill with what you typed</li>
+                <li>When you empty out the input box, show a "sorry nothing to show" message or a funny text</li>
+            </ul>
+            </p>
+            <hr>
+            <br>
+            <label for="greetingsBox">Type your message here: <input type="text" id="greetingsBox" class="form-control"/></label>
+
+            <div class="col-6 mx-auto p-2 greetingsBoxHolder">
+                <h3><!-- Your message comes here--></h3>
+            </div>
+        </div>
+        <script>
+        let inputhere = document.getElementById('greetingsBox');
+        let output = document.getElementsByClassName('greetingsBoxHolder')[0];
+        inputhere.addEventListener('keyup',Greetings)
+        function Greetings(){
+          if (inputhere.value=="") {
+          output.innerHTML ="Fill me up pls";
+        }else {
+          output.innerHTML = inputhere.value;
+        }
+        }
+        </script>
+    </div>
+    <!-- END OF Part 1 -->
+
+    <!-- Part 2: Interaction with inputs and tables -->
+    <div class="row">
+        <div class="col-12 bg-white shadow-sm p-4 mx-auto mt-4">
+            <h3>Part 2: DOM Creation on interaction with inputs</h3>
+            <p>Below this, you have a table, here are the instructions:
+            <ul>
+                <li>When you press enter, check whether all fields have been filled (except remarks)</li>
+                <li>If the first condition is met, create a row with this data and allow the user to fill in the next row
+                    <br>(so there should always be a row with empty inputs to fill in)</li>
+                <li class="bonus">If you press enter and the conditions aren't met, display a popup saying what's wrong with
+                    <a href="https://codeseven.github.io/toastr/demo.html" target="_blank">toastr</a> </li>
+                <li class="bonus">Add a cross to the last cell, that when clicked, deletes the row again (Do NOT use the HTML onclick attribute!)</li>
+            </ul>
+            </p>
+            <hr>
+            <br>
+            <table id="pizzaOrders" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Pizza</th>
+                    <th>Size</th>
+                    <th>Remarks</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr id="emptyRow">
+                    <td><input type="text" id="name" class="form-control" placeholder="Fill in your name"></td>
+                    <td><input type="text" id="pizza" class="form-control" placeholder="Fill in your pizza choice"></td>
+                    <td><input type="text" id="size" class="form-control" placeholder="Fill in your chosen size"></td>
+                    <td><input type="text" id="remarks" class="form-control" placeholder="Fill in your remarks"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <script>
+        let Name = document.getElementById('name');
+        let Pizza = document.getElementById('pizza');
+        let Size = document.getElementById('size');
+        let Remarks = document.getElementById('remarks');
+        document.addEventListener('keypress',function(e){
+          if (e.key =='Enter') {
+            if ((Name.value == "")||(Pizza.value == "")||(Size.value == "")) {
+              alert("All fields except for remarks have to be filled");
+            }
+            else {
+              alert("work");
+            }
+          }
+        });
+
+        </script>
+    </div>
+    <!-- END OF Part 2 -->
+
+    <!-- Part 3: Element alterations -->
+    <div class="row">
+        <div class="col-12 bg-white shadow-sm p-4 mx-auto mt-4">
+            <h3>Part 3: Element alterations</h3>
+            <p class="explanation">Here is what you need to do, below me is a list:
+            <ul>
+                <li>Fix it up so that it is an actual HTML list</li>
+                <li>Make it so the user can type what he / she wants in the final option</li>
+                <li>Launch the above transformation once the button (#launchMe) is pushed</li>
+                <li class="bonus">"Choose your final ingredient" should be placed as placeholder text in the input when it's empty</li>
+                <li class="bonus">When you go away from the input (click somewhere else), if the input is not empty, it should change into a regular LI item with the content of the input</li>
+            </ul>
+            </p>
+            <hr>
+            <br>
+            <button id="launchMe" class="btn btn-success play-button"><i class="fa fa-play"></i></button>
+            <p id="listHolder">This is what you need to make delicious spaghetti:
+                <span>Pasta</span><span>Tomato Sauce</span><span>Cheese</span><span>Choose your final ingredient</span></p>
+
+            <br>
+            <br>
+
+        </div>
+        <script>
+            // Write your code here
+        </script>
+    </div>
+    <!-- END OF Part 3 -->
+
+    <!-- Part 4: Interaction with inputs in combination with elements -->
+    <div class="row">
+        <div class="col-12 bg-white shadow-sm p-4 mx-auto mt-4">
+            <h3>Part 4: Interaction with inputs</h3>
+            <p>Below this, you have a table with some random data, here's what you need to do:
+            <ul>
+                <li>When you type something in the searchInput, the table rows need to be filtered by the typed text</li>
+                <li>Add checkboxes to each header (thead -> th ) when unchecked the columns disappear from the table (default = checked)</li>
+                <li class="bonus">Highlight the found text in the table row</li>
+            </ul>
+            </p>
+            <hr>
+            <br>
+
+            <label>Search in this table:<input type="search" class="form-control" id="searchInput"></label>
+            <table id="searchTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th class="th-sm">Name
+                    </th>
+                    <th class="th-sm">Position
+                    </th>
+                    <th class="th-sm">Office
+                    </th>
+                    <th class="th-sm">Age
+                    </th>
+                    <th class="th-sm">Start date
+                    </th>
+                    <th class="th-sm">Salary
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Tiger Nixon</td>
+                    <td>System Architect</td>
+                    <td>Edinburgh</td>
+                    <td>61</td>
+                    <td>2011/04/25</td>
+                    <td>$320,800</td>
+                </tr>
+                <tr>
+                    <td>Garrett Winters</td>
+                    <td>Accountant</td>
+                    <td>Tokyo</td>
+                    <td>63</td>
+                    <td>2011/07/25</td>
+                    <td>$170,750</td>
+                </tr>
+                <tr>
+                    <td>Ashton Cox</td>
+                    <td>Junior Technical Author</td>
+                    <td>San Francisco</td>
+                    <td>66</td>
+                    <td>2009/01/12</td>
+                    <td>$86,000</td>
+                </tr>
+                <tr>
+                    <td>Cedric Kelly</td>
+                    <td>Senior Javascript Developer</td>
+                    <td>Edinburgh</td>
+                    <td>22</td>
+                    <td>2012/03/29</td>
+                    <td>$433,060</td>
+                </tr>
+                <tr>
+                    <td>Airi Satou</td>
+                    <td>Accountant</td>
+                    <td>Tokyo</td>
+                    <td>33</td>
+                    <td>2008/11/28</td>
+                    <td>$162,700</td>
+                </tr>
+                <tr>
+                    <td>Brielle Williamson</td>
+                    <td>Integration Specialist</td>
+                    <td>New York</td>
+                    <td>61</td>
+                    <td>2012/12/02</td>
+                    <td>$372,000</td>
+                </tr>
+                <tr>
+                    <td>Herrod Chandler</td>
+                    <td>Sales Assistant</td>
+                    <td>San Francisco</td>
+                    <td>59</td>
+                    <td>2012/08/06</td>
+                    <td>$137,500</td>
+                </tr>
+                <tr>
+                    <td>Rhona Davidson</td>
+                    <td>Integration Specialist</td>
+                    <td>Tokyo</td>
+                    <td>55</td>
+                    <td>2010/10/14</td>
+                    <td>$327,900</td>
+                </tr>
+                <tr>
+                    <td>Colleen Hurst</td>
+                    <td>Javascript Developer</td>
+                    <td>San Francisco</td>
+                    <td>39</td>
+                    <td>2009/09/15</td>
+                    <td>$205,500</td>
+                </tr>
+                <tr>
+                    <td>Sonya Frost</td>
+                    <td>Software Engineer</td>
+                    <td>Edinburgh</td>
+                    <td>23</td>
+                    <td>2008/12/13</td>
+                    <td>$103,600</td>
+                </tr>
+                <tr>
+                    <td>Jena Gaines</td>
+                    <td>Office Manager</td>
+                    <td>London</td>
+                    <td>30</td>
+                    <td>2008/12/19</td>
+                    <td>$90,560</td>
+                </tr>
+                <tr>
+                    <td>Quinn Flynn</td>
+                    <td>Support Lead</td>
+                    <td>Edinburgh</td>
+                    <td>22</td>
+                    <td>2013/03/03</td>
+                    <td>$342,000</td>
+                </tr>
+                <tr>
+                    <td>Charde Marshall</td>
+                    <td>Regional Director</td>
+                    <td>San Francisco</td>
+                    <td>36</td>
+                    <td>2008/10/16</td>
+                    <td>$470,600</td>
+                </tr>
+                <tr>
+                    <td>Haley Kennedy</td>
+                    <td>Senior Marketing Designer</td>
+                    <td>London</td>
+                    <td>43</td>
+                    <td>2012/12/18</td>
+                    <td>$313,500</td>
+                </tr>
+                <tr>
+                    <td>Tatyana Fitzpatrick</td>
+                    <td>Regional Director</td>
+                    <td>London</td>
+                    <td>19</td>
+                    <td>2010/03/17</td>
+                    <td>$385,750</td>
+                </tr>
+                <tr>
+                    <td>Michael Silva</td>
+                    <td>Marketing Designer</td>
+                    <td>London</td>
+                    <td>66</td>
+                    <td>2012/11/27</td>
+                    <td>$198,500</td>
+                </tr>
+                <tr>
+                    <td>Paul Byrd</td>
+                    <td>Chief Financial Officer (CFO)</td>
+                    <td>New York</td>
+                    <td>64</td>
+                    <td>2010/06/09</td>
+                    <td>$725,000</td>
+                </tr>
+                <tr>
+                    <td>Gloria Little</td>
+                    <td>Systems Administrator</td>
+                    <td>New York</td>
+                    <td>59</td>
+                    <td>2009/04/10</td>
+                    <td>$237,500</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <script>
+            // Write your code here
+        </script>
+    </div>
+    <!-- END OF Part 4 -->
+
+    <!-- Part 5: Make it move -->
+    <div class="row">
+        <div class="col-12 bg-white shadow-sm p-4 mx-auto mt-4">
+            <h3>Part 5: Make it move</h3>
+            <p>Below this, you have a div that needs to move left to right using JS for the motion. Make it reach the end in 2 seconds, then return in 5s. Repeat that forever.</p>
+            <hr>
+            <br>
+
+            <div id="moveAnimation" class="block"></div>
+        </div>
+        <script>
+            // Write your code here
+        </script>
+    </div>
+    <!-- END OF Part 5 -->
+
+    <!-- Part 6: Make it follow -->
+    <div class="row">
+        <div class="col-12 bg-white shadow-sm p-4 mx-auto mt-4">
+            <h3>Part 6: make it follow</h3>
+            <p>Below this, you have a div that needs to move left to right using JS for the motion. It should follow the mouse horizontally.</p>
+            <hr>
+            <br>
+
+            <div id="followMouse" class="block"></div>
+        </div>
+        <script>
+            // Write your code here
+        </script>
+    </div>
+    <!-- END OF Part 6 -->
+
+    <!-- Part 7: Name selector -->
+    <div class="row">
+        <div class="col-12 bg-white shadow-sm p-4 mx-auto mt-4">
+            <h3>Part 7: Sliders</h3>
+            <p>Recreate this very intuitive user interface. Insert the DOM nodes (html elements) using document.createElement();</p>
+            <img src="./input.gif" alt="Interface" />
+            <hr/>
+            <br/>
+
+            <div id="target"></div>
+        </div>
+        <script>
+            // Write your code here
+        </script>
+    </div>
+    <!-- END OF Part 7 -->
+
+    <!-- Part 8: Name selector2 -->
+    <div class="row">
+        <div class="col-12 bg-white shadow-sm p-4 mx-auto mt-4">
+            <h3>Part 8: Sliders again</h3>
+            <p>Put the exercise from above, here again. They should both keep working. And you should only write one more line. In other words you cannot hard code ids 😉 If needed, rewrite the above code.</p>
+            <hr/>
+            <br/>
+
+            <div id="target2"></div>
+        </div>
+        <script>
+            // You can put at most one line here
+        </script>
+    </div>
+    <!-- END OF Part 8 -->
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+<script>
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-bottom-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+</script>
+</body>
+</html>
