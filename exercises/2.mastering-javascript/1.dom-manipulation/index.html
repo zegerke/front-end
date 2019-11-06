@@ -363,15 +363,19 @@
         <script>
             let animate = document.getElementById("moveAnimation");
             let pos = 0;
-            const maxpos = 500
-            let id = setInterval(frame, 5)
+            const maxpos = 1092;
+            let id = setInterval(frame, 1000/60);
+            let speed = 9;
             function frame(){
-              if (pos == maxpos) {
-                clearInterval(id)
-              }else {
-                pos++;
-                animate.style.left = pos + "px";
+              pos = pos + speed;
+              if (pos > maxpos) {
+                speed = -4;
               }
+              else if (pos < 0) {
+                speed = 9;
+              }
+              animate.style.left = pos + 'px';
+
             }
 
         </script>
@@ -389,7 +393,18 @@
             <div id="followMouse" class="block"></div>
         </div>
         <script>
-            // Write your code here
+          let follow = document.getElementById('followMouse');
+          document.addEventListener('mousemove',Moveit);
+          function Moveit(event){
+            let x = event.clientX;
+            if (x > 1092) {
+
+            }
+            else {
+              follow.style.left = x + "px";
+            }
+
+          }
         </script>
     </div>
     <!-- END OF Part 6 -->
@@ -406,7 +421,47 @@
             <div id="target"></div>
         </div>
         <script>
-            // Write your code here
+          let alfabet =["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+          console.log(alfabet);
+          let target = document.getElementById('target');
+          let targeta = document.createElement('div');
+          target.appendChild(targeta);
+          let labl = document.createElement('label');
+          labl.innerHTML ="Enter your firstname: "
+          let namehere= document.createElement("input");
+          namehere.type = "text";
+          let displayname = namehere.value;
+          targeta.appendChild(labl);
+          labl.appendChild(namehere);
+          namehere.addEventListener('click',sliderz);
+
+          function Addslider(){
+            let targetx =document.createElement('div')
+            let labl1 = document.createElement('label');
+            let slider1= document.createElement("input");
+            slider1.type = "range";
+            slider1.min=0;
+            slider1.max=25;
+            slider1.value=0;
+            labl1.innerHTML=slider1.value;
+            targeta.appendChild(targetx)
+            targetx.appendChild(labl1);
+            targetx.appendChild(slider1);
+            slider1.oninput = function() {
+              labl1.innerHTML=alfabet[slider1.value];
+            }
+          };
+
+          function sliderz(event){
+            namehere.removeEventListener('click', sliderz);
+            Addslider();
+
+            let btn = document.createElement('button');
+            btn.innerHTML = "Add letter.";
+            btn.style.display = "block";
+            btn.addEventListener("click", Addslider)
+            target.appendChild(btn);
+          }
         </script>
     </div>
     <!-- END OF Part 7 -->
