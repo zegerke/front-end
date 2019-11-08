@@ -345,7 +345,27 @@
             </table>
         </div>
         <script>
-            // Write your code here
+        document.getElementById('searchInput').addEventListener("keyup",myFunction)
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("searchInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("searchTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
+
         </script>
     </div>
     <!-- END OF Part 4 -->
@@ -421,46 +441,62 @@
             <div id="target"></div>
         </div>
         <script>
-          let alfabet =["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
-          console.log(alfabet);
-          let target = document.getElementById('target');
-          let targeta = document.createElement('div');
-          target.appendChild(targeta);
-          let labl = document.createElement('label');
-          labl.innerHTML ="Enter your firstname: "
-          let namehere= document.createElement("input");
-          namehere.type = "text";
-          let displayname = namehere.value;
-          targeta.appendChild(labl);
-          labl.appendChild(namehere);
-          namehere.addEventListener('click',sliderz);
+          doit();
+          function doit(){
+            let exercises =  document.getElementsByClassName('col-12 bg-white shadow-sm p-4 mx-auto mt-4');
+            let exercisesarray = Array.from(exercises);
+            let alfabet =["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+            let target = exercisesarray[exercisesarray.length-1].lastChild.previousSibling;
+            let targeta = document.createElement('div');
+            target.appendChild(targeta);
+            let labl = document.createElement('label');
+            labl.innerHTML ="Enter your firstname: "
+            let namehere= document.createElement("input");
+            namehere.type = "text";
+            targeta.appendChild(labl);
+            labl.appendChild(namehere);
+            namehere.addEventListener('click',sliderz);
 
-          function Addslider(){
-            let targetx =document.createElement('div')
-            let labl1 = document.createElement('label');
-            let slider1= document.createElement("input");
-            slider1.type = "range";
-            slider1.min=0;
-            slider1.max=25;
-            slider1.value=0;
-            labl1.innerHTML=slider1.value;
-            targeta.appendChild(targetx)
-            targetx.appendChild(labl1);
-            targetx.appendChild(slider1);
-            slider1.oninput = function() {
-              labl1.innerHTML=alfabet[slider1.value];
+            function Addslider(){
+              let targetx =document.createElement('div')
+              let labl1 = document.createElement('label');
+              let slider1= document.createElement("input");
+              slider1.type = "range";
+              slider1.min=0;
+              slider1.max=25;
+              slider1.value=0;
+              labl1.innerHTML="A";
+              labl1.setAttribute("class","labal")
+              targeta.appendChild(targetx)
+              targetx.appendChild(labl1);
+              targetx.appendChild(slider1);
+              slider1.oninput = function() {
+                labl1.innerHTML = alfabet[slider1.value];
+                showIt();
+                }
+
+              function showIt() {
+                let myletters =[]
+                let labals =target.getElementsByClassName('labal')
+                console.log(labals[0].innerHTML);
+                for (var i = 0; i < labals.length; i++) {
+                  myletters.push(labals[i].innerHTML);
+                  console.log(myletters);
+                  namehere.value = myletters.toString().replace(/,/g,"");
+            };
+
+              }
             }
-          };
+            function sliderz(event){
+              namehere.removeEventListener('click', sliderz);
+              Addslider();
 
-          function sliderz(event){
-            namehere.removeEventListener('click', sliderz);
-            Addslider();
-
-            let btn = document.createElement('button');
-            btn.innerHTML = "Add letter.";
-            btn.style.display = "block";
-            btn.addEventListener("click", Addslider)
-            target.appendChild(btn);
+              let btn = document.createElement('button');
+              btn.innerHTML = "Add letter.";
+              btn.style.display = "block";
+              btn.addEventListener("click", Addslider)
+              target.appendChild(btn);
+            }
           }
         </script>
     </div>
@@ -477,7 +513,8 @@
             <div id="target2"></div>
         </div>
         <script>
-            // You can put at most one line here
+        doit();
+
         </script>
     </div>
     <!-- END OF Part 8 -->
