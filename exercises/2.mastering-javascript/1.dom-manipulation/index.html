@@ -345,25 +345,39 @@
             </table>
         </div>
         <script>
+        var table = document.getElementById('searchTable').getElementsByTagName('thead')[0];
+        var row = table.insertRow(0);
+        for (var i = 0; i < 6; i++) {
+          var cell = row.insertCell(i)
+          var checkbox = document.createElement("input");
+          checkbox.type = 'checkbox';
+          checkbox.checked = true;
+          checkbox.addEventListener('change', Hidecol);
+          cell.appendChild(checkbox);
+
+        }
+        function Hidecol(){
+
+        }
         document.getElementById('searchInput').addEventListener("keyup",myFunction)
-  function myFunction() {
-    var input, filter, table, tr, td, i, txtValue;
-    input = document.getElementById("searchInput");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("searchTable");
-    tr = table.getElementsByTagName("tr");
-    for (i = 0; i < tr.length; i++) {
-      td = tr[i].getElementsByTagName("td")[0];
-      if (td) {
-        txtValue = td.textContent || td.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-          tr[i].style.display = "";
-        } else {
-          tr[i].style.display = "none";
+        function myFunction() {
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("searchInput");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("searchTable");
+          tr = table.getElementsByTagName("tr");
+          for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+              txtValue = td.textContent || td.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+            }
+          }
+        }
       }
-    }
-  }
-}
 
 
         </script>

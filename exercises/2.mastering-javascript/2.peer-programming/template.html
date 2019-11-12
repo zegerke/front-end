@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fix me!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
+    <link rel="stylesheet" href="stylesheet.css">
+
+</head>
+<body class="bg-dark pt-4">
+<div id="exercisesHolder" class="container">
+
+
+    <div class="row">
+        <div class="col-12 bg-white shadow-sm p-4 mx-auto mt-4 border">
+            <input id="input" type="text">
+            <select name="operators" id="op">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="/">/</option>
+                <option value="*">*</option>
+            </select>
+            <input id="input2" type="text">
+            <br>
+            <button class="btn btn-primary" id="button" >Calculate!</button>
+            <div id="dic">
+                <p id="here">here is your result:</p>
+                <p id="pp"></p>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+
+
+<script>
+    console.log(document.getElementById("op").value);
+    
+    let button = document.getElementById('button');
+    button.addEventListener('click', clicky)
+    function clicky(){
+        console.log(document.getElementById("op").value);
+        console.log("Clicky");
+        button.innerHTML= "  Calculating...";
+        let icon = document.createElement("i");
+        icon.classList.add("fas")
+        icon.classList.add("fa-spinner")
+        icon.classList.add("fa-spin")
+        button.prepend(icon);
+
+        button.classList.remove("btn-primary");
+        button.classList.add("btn-success");
+        
+        setTimeout(() => {
+        let p = document.getElementById("pp")
+        button.classList.add("btn-primary");
+        button.classList.remove("btn-success");
+        button.removeChild(icon);
+        button.innerHTML = "Calculate!"    
+
+        if ((document.getElementById('input').value =="")||(document.getElementById('input2').value =="")) {
+            alert("Both inputs need to be filled in");
+        }
+        else{
+            switch (document.getElementById("op").value) {
+                case "+":
+                p.innerHTML=parseFloat( document.getElementById('input').value) +parseFloat( document.getElementById('input2').value);
+                document.getElementById("here").style.display ="inline";               
+                    break;
+            
+                case '-':
+                p.innerHTML=parseFloat( document.getElementById('input').value) - parseFloat( document.getElementById('input2').value);
+                document.getElementById("here").style.display ="inline";     
+                    break;
+                case "/":
+                p.innerHTML=parseFloat( document.getElementById('input').value) / parseFloat( document.getElementById('input2').value);
+                document.getElementById("here").style.display ="inline";     
+                    break;
+                case "*":
+                p.innerHTML=parseFloat( document.getElementById('input').value) * parseFloat( document.getElementById('input2').value);
+                document.getElementById("here").style.display ="inline";     
+                    break;                             
+            }
+
+        }
+
+        }, 500);
+    }
+
+</script>
+</body>
+</html>

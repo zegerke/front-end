@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>snek</title>
+<style>
+    button{
+        display: block;
+        padding-top: 10px;
+    }
+    body{
+        background: lightgoldenrodyellow;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center ;
+    }
+    #snekcanvas{    
+        border: 2px black solid;
+    }
+</style>
+</head>
+<body>
+    <p>SCORE : </p>
+    <p id="score"></p>
+    <canvas id="snekcanvas" width="300" height="300"></canvas>
+    <button id="start">Start Game</button>
+    <button id="reset">Reset</button>
+</body>
+<script>
+    let shpeed = 100;
+    let changeDir = false;
+    let canvas = document.getElementById('snekcanvas');
+    let ctx = canvas.getContext("2d");
+    let snake = [  {x: 150, y: 150},  {x: 140, y: 150},  {x: 130, y: 150},  {x: 120, y: 150},  {x: 110, y: 150},];
+    let dx =  10;
+    let dy = 0;
+    let score = 0
+    document.getElementById('score').innerHTML = score
+    window.onload = drawSnake();
+    document.getElementById("start").addEventListener("click", main);
+    document.addEventListener("keydown", changeDirection);
+
+    function drawSnakePart(snakePart) {
+        ctx.fillStyle = 'lightgreen';
+        ctx.strokeStyle = 'darkgreen';
+        ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
+        ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
+    }
+
+    function drawSnake() {
+        snake.forEach(drawSnakePart);
+    }
+    function advanceSnake() {  
+        const head = {x: snake[0].x + dx, y: snake[0].y + dy};
+        snake.unshift(head);
+        const didEatFood = snake[0].x === foodX && snake[0].y === foodY;
+        if (didEatFood) {
+            score += 10;
+            document.getElementById('score').innerHTML = score;
+            createFood();
+        }
+        else {
+            snake.pop();
+        }
+    }
+        
+    
+    function clearCanvas() {
+        ctx.fillStyle = "white";
+        ctx.strokeStyle = "black";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeRect(0, 0, canvas.width, canvas.height);
+    }
+    
+    createFood();
+    drawFood();
+    function main() {
+        if (didGameEnd()) {
+            alert("Game 0ver!");
+            return;
+        }
+      setTimeout(function onTick() {
+        changeDir = false;
+        clearCanvas();
+        drawFood();
+        advanceSnake();    
+        drawSnake();
+        main();
+      }, shpeed)
+    }
+    function changeDirection(event) {
+      const LEFT_KEY = 37;
+      const RIGHT_KEY = 39;
+      const UP_KEY = 38;
+      const DOWN_KEY = 40;
+      const keyPressed = event.keyCode;
+      const goingUp = dy === -10;
+      const goingDown = dy === 10;
+      const goingRight = dx === 10;
+      const goingLeft = dx === -10;
+      if (changeDir) {
+          return;  
+      }
+      if (keyPressed === LEFT_KEY && !goingRight) {
+            dx = -10;    dy = 0;
+            changeDir = true;  
+        }
+      if (keyPressed === UP_KEY && !goingDown) {
+            dx = 0;    dy = -10;
+            changeDir = true;  
+        }
+      if (keyPressed === RIGHT_KEY && !goingLeft) {
+            dx = 10;    dy = 0;
+            changeDir = true;  
+        }
+      if (keyPressed === DOWN_KEY && !goingUp) {
+            dx = 0;    dy = 10;
+            changeDir = true;  
+        }
+    }
+    function randomTen(min, max) {
+        return Math.round((Math.random() * (max-min) + min) / 10) * 10;
+    }
+    function createFood() {
+      foodX = randomTen(0, canvas.width - 10);
+      foodY = randomTen(0, canvas.height - 10);
+      snake.forEach(function isFoodOnSnake(part) {
+        const foodIsOnSnake = part.x == foodX && part.y == foodY;    
+        if (foodIsOnSnake){
+          createFood();  
+        }
+      }) 
+    }
+    function drawFood() {         
+        ctx.fillStyle = 'red';
+        ctx.strokestyle = 'darkred';
+        ctx.fillRect(foodX, foodY, 10, 10);
+        ctx.strokeRect(foodX, foodY, 10, 10);
+    }   
+    function didGameEnd() {
+        for (let i = 4; i < snake.length; i++) {
+            const didCollide = snake[i].x === snake[0].x && snake[i].y === snake[0].y;
+            if (didCollide){
+             return true;  
+            }
+        }
+    }
+    document.getElementById("reset").addEventListener('click',reset)
+    function reset(){
+        snake = [  {x: 150, y: 150},  {x: 140, y: 150},  {x: 130, y: 150},  {x: 120, y: 150},  {x: 110, y: 150},];
+        clearCanvas();
+        drawSnake();
+        createFood();
+        drawFood();
+        
+    }        
+</script>
+</html>
