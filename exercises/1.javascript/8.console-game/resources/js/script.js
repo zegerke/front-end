@@ -1,8 +1,8 @@
 //**********Good luck************ */
 //music
 let musicbut = document.getElementById('music');
-let musicon = true;
-musicbut.onclick = togglemusic;
+let musicon = false;
+musicbut.onclick = togglemusic();
 
 function togglemusic(){
   if (musicon == true) {

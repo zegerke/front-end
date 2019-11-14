@@ -6,8 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>snek</title>
 <style>
-    button{
-        display: block;
+    button,p{
+        display: inline;    
+        margin-bottom:5px;
+        margin-top: 5px;
+    }
+    div,label{
         margin-top: 10px;
     }
     body{
@@ -20,17 +24,53 @@
     }
     #snekcanvas{    
         border: 2px black solid;
+        background-color: white;
+    }
+    #highscore{
+        font-weight: bold;
     }
 </style>
 </head>
 <body>
-    <p>SCORE : </p>
-    <p id="score"></p>
+    <audio id="themeSong" src="snek.mp3" autoplay loop></audio>
+    <audio id="eatsound" src="eat.wav"></audio>
+    <label >Your name : <input type="text" id="playername"></label>  
+    <div>
+        <p>Choose your snake:</p>
+        <select name="snake color" id="colors">
+            <option value="green">Green</option>
+            <option value="blue">Blue</option>
+            <option value="grey">Grey</option>
+            <option value="pink">Pink</option>
+            <option value="yellow">Yellow</option>
+            <option value="purple">Purple</option>
+        </select>
+    </div>
+    <button id="music">Toggle music</button>
     <canvas id="snekcanvas" width="300" height="300"></canvas>
     <button id="start">Start Game</button>
-    <button id="reset">Reset</button>
+   <div>
+        <p>SCORE : </p>
+        <p id="score"></p>
+    </div>
+    <p>CURRENT HIGHSCORE : </p>
+    <p id="highscore"></p>
+    <p>HIGHSCORES</p>
+    <div>
+        <p>1st  </p>
+        <p id="first">0</p>
+    </div>
+    <div>
+        <p>2nd  </p>
+        <p id="second">0</p>
+    </div>
+    <div>
+        <p>3rd  </p>
+        <p id="third">0</p>
+    </div>
 </body>
 <script>
+    //just some variables
     let shpeed = 100;
     let changeDir = false;
     let canvas = document.getElementById('snekcanvas');
@@ -38,15 +78,73 @@
     let snake = [  {x: 150, y: 150},  {x: 140, y: 150},  {x: 130, y: 150},  {x: 120, y: 150},  {x: 110, y: 150},];
     let dx =  10;
     let dy = 0;
-    let score = 0
-    document.getElementById('score').innerHTML = score
+    color = "lightgreen";
+    //score
+    let score = 0;
+    let currentscore;
+    let playername;
+    let highscore = 0 ;
+    document.getElementById('score').innerHTML = score;
+    document.getElementById('highscore').innerHTML = highscore;
+
     window.onload = drawSnake();
+    //some eventlisteners
     document.getElementById("start").addEventListener("click", main);
     document.addEventListener("keydown", changeDirection);
+    //music
+    let musicbut = document.getElementById('music');
+    let musicon = false;
+    musicbut.onclick = togglemusic;
 
+    function togglemusic(){
+     if (musicon == true) {
+      musicon = false;
+      document.getElementById('themeSong').pause();
+     }
+     else {
+     musicon = true;
+     document.getElementById('themeSong').play();
+     }
+    };
+    //color of the snake
+    document.getElementById("colors").addEventListener('input',Color)
+    
+    function Color(){
+        switch (document.getElementById("colors").value) {
+            case "green":
+                color ="lightgreen";
+                drawSnake();
+            break;
+        
+            case "blue":
+                color ="blue";
+                drawSnake();
+            break;
+
+            case "grey":
+                color = "lightgrey";
+                drawSnake();
+            break;
+
+            case "pink":
+                color ="pink";
+                drawSnake();                
+            break;
+
+            case "yellow":
+                color ="yellow";
+                drawSnake();
+            break;     
+            case "purple":
+                color ="purple";
+                drawSnake();
+            break;                       
+        }
+    }
+    //makes snake appear
     function drawSnakePart(snakePart) {
-        ctx.fillStyle = 'lightgreen';
-        ctx.strokeStyle = 'darkgreen';
+        ctx.fillStyle = color;
+        ctx.strokeStyle = "grey";
         ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
         ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
     }
@@ -54,53 +152,76 @@
     function drawSnake() {
         snake.forEach(drawSnakePart);
     }
+    //determines snake position and if he ate or reaches a wall
     function advanceSnake() {  
         const head = {x: snake[0].x + dx, y: snake[0].y + dy};
         snake.unshift(head);
         const didEatFood = snake[0].x === foodX && snake[0].y === foodY;
         if (didEatFood) {
             score += 10;
+            shpeed -= 2
             document.getElementById('score').innerHTML = score;
             createFood();
+            document.getElementById("eatsound").play();
         }
         else {
             snake.pop();
-            snake.forEach(element => {
+            
+        }
+        snake.forEach(element => {
              if (element.x > 290) {
              element.x = 0;
              }
             });
-            snake.forEach(element => {
+        snake.forEach(element => {
              if (element.x < 0) {
              element.x = 290;
              }
             });
-            snake.forEach(element => {
+        snake.forEach(element => {
              if (element.y > 290) {
              element.y = 0;
              }
             });
-            snake.forEach(element => {
+        snake.forEach(element => {
              if (element.y < 0) {
              element.y = 290;
              }
             });
-        }
+
     }
         
-    
+    //clears canvas
     function clearCanvas() {
         ctx.fillStyle = "white";
         ctx.strokeStyle = "black";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.strokeRect(0, 0, canvas.width, canvas.height);
     }
-    
+    // make apple appear before game start
     createFood();
     drawFood();
+    //makes snake move forward on a set interval
     function main() {
+        document.getElementById("colors").removeEventListener('input',Color)
+        document.getElementById("start").removeEventListener("click", main);
         if (didGameEnd()) {
             alert("Game 0ver!");
+            currentscore = score
+            console.log(currentscore);
+            if (currentscore > highscore) {
+                highscore = currentscore;
+                 playername = document.getElementById('playername').value;
+                if (playername == "") {
+                    document.getElementById('highscore').innerHTML = "Anonymous, " + highscore;   
+                }
+                else{
+                    document.getElementById('highscore').innerHTML = playername+", " + highscore;                    
+                }
+                
+
+            }
+            reset();
             return;
         }
       setTimeout(function onTick() {
@@ -112,6 +233,7 @@
         main();
       }, shpeed)
     }
+    //arrow keys functionality
     function changeDirection(event) {
       const LEFT_KEY = 37;
       const RIGHT_KEY = 39;
@@ -142,6 +264,7 @@
             changeDir = true;  
         }
     }
+    //determines food position
     function randomTen(min, max) {
         return Math.round((Math.random() * (max-min) + min) / 10) * 10;
     }
@@ -155,12 +278,14 @@
         }
       }) 
     }
+    //makes food appear
     function drawFood() {         
         ctx.fillStyle = 'red';
         ctx.strokestyle = 'darkred';
         ctx.fillRect(foodX, foodY, 10, 10);
         ctx.strokeRect(foodX, foodY, 10, 10);
     }   
+    //makes game stop if it eats itself
     function didGameEnd() {
         for (let i = 4; i < snake.length; i++) {
             const didCollide = snake[i].x === snake[0].x && snake[i].y === snake[0].y;
@@ -169,15 +294,20 @@
             }
         }
     }
-    document.getElementById("reset").addEventListener('click',reset)
+    //resets playing field
     function reset(){
         snake = [  {x: 150, y: 150},  {x: 140, y: 150},  {x: 130, y: 150},  {x: 120, y: 150},  {x: 110, y: 150},];
+        dx = 10;
+        dy = 0
+        shpeed = 100
         clearCanvas();
         drawSnake();
         createFood();
         drawFood();
         score = 0;
         document.getElementById('score').innerHTML = score;
+        document.getElementById("colors").addEventListener('input',Color);
+        document.getElementById("start").addEventListener("click", main);
     }        
 </script>
 </html>
