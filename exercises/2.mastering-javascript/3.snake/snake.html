@@ -72,6 +72,7 @@
 <script>
     //just some variables
     let shpeed = 100;
+    let player;
     let changeDir = false;
     let canvas = document.getElementById('snekcanvas');
     let ctx = canvas.getContext("2d");
@@ -86,8 +87,15 @@
     let highscore = 0 ;
     document.getElementById('score').innerHTML = score;
     document.getElementById('highscore').innerHTML = highscore;
-
-    window.onload = drawSnake();
+    //make snake and apple appear on load
+    window.onload = function(){
+        document.getElementById("first").innerHTML =JSON.parse(localStorage.getItem("bestscores"))[0].name +", " + JSON.parse(localStorage.getItem("bestscores"))[0].playerscore;
+        document.getElementById("second").innerHTML =JSON.parse(localStorage.getItem("bestscores"))[1].name +", " + JSON.parse(localStorage.getItem("bestscores"))[1].playerscore;
+        document.getElementById("third").innerHTML =JSON.parse(localStorage.getItem("bestscores"))[2].name +", " + JSON.parse(localStorage.getItem("bestscores"))[2].playerscore;
+        drawSnake();
+        createFood();
+        drawFood();
+    }    
     //some eventlisteners
     document.getElementById("start").addEventListener("click", main);
     document.addEventListener("keydown", changeDirection);
@@ -143,7 +151,10 @@
     }
     //makes snake appear
     function drawSnakePart(snakePart) {
-        ctx.fillStyle = color;
+        let grd = ctx.createLinearGradient(snake[0].x,snake[0].y,snake[snake.length-1].x,snake[snake.length-1].y);
+        grd.addColorStop(0, color);
+        grd.addColorStop(1, "white");
+        ctx.fillStyle = grd;
         ctx.strokeStyle = "grey";
         ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
         ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
@@ -188,7 +199,6 @@
              element.y = 290;
              }
             });
-
     }
         
     //clears canvas
@@ -198,29 +208,40 @@
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.strokeRect(0, 0, canvas.width, canvas.height);
     }
-    // make apple appear before game start
-    createFood();
-    drawFood();
     //makes snake move forward on a set interval
+    let bestscores =[{"name":"Anonymous","playerscore":40}, {"name":"Anonymous","playerscore":30}, {"name":"Anonymous","playerscore":10}]
+    localStorage.setItem("bestscores",JSON.stringify(bestscores))
     function main() {
         document.getElementById("colors").removeEventListener('input',Color)
         document.getElementById("start").removeEventListener("click", main);
         if (didGameEnd()) {
             alert("Game 0ver!");
             currentscore = score
-            console.log(currentscore);
+            playername = document.getElementById('playername').value;
             if (currentscore > highscore) {
                 highscore = currentscore;
-                 playername = document.getElementById('playername').value;
                 if (playername == "") {
                     document.getElementById('highscore').innerHTML = "Anonymous, " + highscore;   
                 }
                 else{
                     document.getElementById('highscore').innerHTML = playername+", " + highscore;                    
                 }
-                
-
             }
+            if (playername == "") {
+                 player = {
+                    name : "Anonymous",
+                    playerscore: currentscore,
+                }
+            }
+            else{
+                 player = {
+                    name : playername,
+                    playerscore: currentscore,
+                }
+            }      
+            document.getElementById("first").innerHTML =JSON.parse(localStorage.getItem("bestscores"))[0].name +", " + JSON.parse(localStorage.getItem("bestscores"))[0].playerscore;
+            document.getElementById("second").innerHTML =JSON.parse(localStorage.getItem("bestscores"))[1].name +", " + JSON.parse(localStorage.getItem("bestscores"))[1].playerscore;
+            document.getElementById("third").innerHTML =JSON.parse(localStorage.getItem("bestscores"))[2].name +", " + JSON.parse(localStorage.getItem("bestscores"))[2].playerscore;
             reset();
             return;
         }
