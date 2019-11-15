@@ -95,16 +95,8 @@
         drawSnake();
         createFood();
         drawFood();
-        if (JSON.parse(localStorage.getItem("bestscores")).length >2) {
-            bestscores = JSON.parse(localStorage.getItem("bestscores"));
-                bestscores.sort(function (x,y){
-                    return y.playerscore - x.playerscore;
-                })
-            localStorage.setItem("bestscores",JSON.stringify(bestscores));
-            document.getElementById("first").innerHTML =JSON.parse(localStorage.getItem("bestscores"))[0].name +", " + JSON.parse(localStorage.getItem("bestscores"))[0].playerscore;
-            document.getElementById("second").innerHTML =JSON.parse(localStorage.getItem("bestscores"))[1].name +", " + JSON.parse(localStorage.getItem("bestscores"))[1].playerscore;
-            document.getElementById("third").innerHTML =JSON.parse(localStorage.getItem("bestscores"))[2].name +", " + JSON.parse(localStorage.getItem("bestscores"))[2].playerscore;
-        }    
+
+        
     }    
     //some eventlisteners
     document.getElementById("start").addEventListener("click", main);
