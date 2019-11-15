@@ -95,8 +95,6 @@
         drawSnake();
         createFood();
         drawFood();
-
-        
     }    
     //some eventlisteners
     document.getElementById("start").addEventListener("click", main);
@@ -221,11 +219,14 @@
                     document.getElementById('highscore').innerHTML = playername+", " + highscore;                    
                 }
             }
+
             
-            if (typeof JSON.parse(localStorage.getItem("bestscores")) === "undefined") {
+            if (typeof bestscores === 'undefined'||typeof bestscores === null) {
                 let bestscores = [];
                 localStorage.setItem("bestscores",JSON.stringify(bestscores));
-            }
+                console.log("ja");
+                
+            };
             if (playername == "") {
                  player = {
                     name : "Anonymous",
