@@ -10,17 +10,19 @@
         display: inline;    
         margin-bottom:5px;
         margin-top: 5px;
+    
     }
     div,label{
         margin-top: 10px;
     }
     body{
-        background: lightgoldenrodyellow;
+        background: url(bg.jpg);
         display: flex;
         flex-flow: column;
         justify-content: center;
         align-items: center;
         align-content: center ;
+        color: white;    
     }
     #snekcanvas{    
         border: 2px black solid;
@@ -37,16 +39,16 @@
     <label >Your name : <input type="text" id="playername"></label>  
     <div>
         <p>Choose your snake:</p>
-        <select name="snake color" id="colors">
-            <option value="green">Green</option>
-            <option value="blue">Blue</option>
-            <option value="grey">Grey</option>
-            <option value="pink">Pink</option>
-            <option value="yellow">Yellow</option>
-            <option value="purple">Purple</option>
-        </select>
+        <input type="color"id="colors">
+        <button id="music">Toggle music</button>
     </div>
-    <button id="music">Toggle music</button>
+    
+    <div>
+        <p>Select Difficulty : </p>
+        <button id="easy">Git gud</button>
+        <button id="normal">Normal</button>
+        <button id="hard">Hard</button>
+    </div>
     <canvas id="snekcanvas" width="300" height="300"></canvas>
     <button id="start">Start Game</button>
    <div>
@@ -72,6 +74,7 @@
 <script>
     //just some variables
     let shpeed = 100;
+    let increase = 2;
     let player;
     let changeDir = false;
     let canvas = document.getElementById('snekcanvas');
@@ -89,16 +92,39 @@
     document.getElementById('highscore').innerHTML = highscore;
     //make snake and apple appear on load
     window.onload = function(){
-        document.getElementById("first").innerHTML =JSON.parse(localStorage.getItem("bestscores"))[0].name +", " + JSON.parse(localStorage.getItem("bestscores"))[0].playerscore;
-        document.getElementById("second").innerHTML =JSON.parse(localStorage.getItem("bestscores"))[1].name +", " + JSON.parse(localStorage.getItem("bestscores"))[1].playerscore;
-        document.getElementById("third").innerHTML =JSON.parse(localStorage.getItem("bestscores"))[2].name +", " + JSON.parse(localStorage.getItem("bestscores"))[2].playerscore;
         drawSnake();
         createFood();
         drawFood();
+        if (JSON.parse(localStorage.getItem("bestscores")).length >2) {
+            bestscores = JSON.parse(localStorage.getItem("bestscores"));
+                bestscores.sort(function (x,y){
+                    return y.playerscore - x.playerscore;
+                })
+            localStorage.setItem("bestscores",JSON.stringify(bestscores));
+            document.getElementById("first").innerHTML =JSON.parse(localStorage.getItem("bestscores"))[0].name +", " + JSON.parse(localStorage.getItem("bestscores"))[0].playerscore;
+            document.getElementById("second").innerHTML =JSON.parse(localStorage.getItem("bestscores"))[1].name +", " + JSON.parse(localStorage.getItem("bestscores"))[1].playerscore;
+            document.getElementById("third").innerHTML =JSON.parse(localStorage.getItem("bestscores"))[2].name +", " + JSON.parse(localStorage.getItem("bestscores"))[2].playerscore;
+        }    
     }    
     //some eventlisteners
     document.getElementById("start").addEventListener("click", main);
     document.addEventListener("keydown", changeDirection);
+    //difficulty
+    document.getElementById("easy").addEventListener("click",easy);
+    function easy(){
+        shpeed = 150;
+        increase = 1;
+    }
+    document.getElementById("normal").addEventListener("click",normal);
+    function normal(){
+        shpeed = 100;
+        increase = 2;
+    }
+    document.getElementById("hard").addEventListener("click",hard);
+    function hard(){
+        shpeed = 60;
+        increase = 3;
+    }
     //music
     let musicbut = document.getElementById('music');
     let musicon = false;
@@ -118,42 +144,14 @@
     document.getElementById("colors").addEventListener('input',Color)
     
     function Color(){
-        switch (document.getElementById("colors").value) {
-            case "green":
-                color ="lightgreen";
-                drawSnake();
-            break;
-        
-            case "blue":
-                color ="blue";
-                drawSnake();
-            break;
-
-            case "grey":
-                color = "lightgrey";
-                drawSnake();
-            break;
-
-            case "pink":
-                color ="pink";
-                drawSnake();                
-            break;
-
-            case "yellow":
-                color ="yellow";
-                drawSnake();
-            break;     
-            case "purple":
-                color ="purple";
-                drawSnake();
-            break;                       
-        }
+       color = document.getElementById('colors').value;
+       drawSnake();        
     }
     //makes snake appear
     function drawSnakePart(snakePart) {
         let grd = ctx.createLinearGradient(snake[0].x,snake[0].y,snake[snake.length-1].x,snake[snake.length-1].y);
         grd.addColorStop(0, color);
-        grd.addColorStop(1, "white");
+        grd.addColorStop(1, "lightgrey");
         ctx.fillStyle = grd;
         ctx.strokeStyle = "grey";
         ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
@@ -170,7 +168,7 @@
         const didEatFood = snake[0].x === foodX && snake[0].y === foodY;
         if (didEatFood) {
             score += 10;
-            shpeed -= 2
+            shpeed -= increase
             document.getElementById('score').innerHTML = score;
             createFood();
             document.getElementById("eatsound").play();
@@ -209,11 +207,15 @@
         ctx.strokeRect(0, 0, canvas.width, canvas.height);
     }
     //makes snake move forward on a set interval
-    let bestscores =[{"name":"Anonymous","playerscore":40}, {"name":"Anonymous","playerscore":30}, {"name":"Anonymous","playerscore":10}]
-    localStorage.setItem("bestscores",JSON.stringify(bestscores))
+    
+
+    
     function main() {
         document.getElementById("colors").removeEventListener('input',Color)
         document.getElementById("start").removeEventListener("click", main);
+        document.getElementById("easy").removeEventListener("click",easy);
+        document.getElementById("normal").removeEventListener("click",normal);
+        document.getElementById("hard").removeEventListener("click",hard);
         if (didGameEnd()) {
             alert("Game 0ver!");
             currentscore = score
@@ -227,21 +229,41 @@
                     document.getElementById('highscore').innerHTML = playername+", " + highscore;                    
                 }
             }
+            
+            if (typeof JSON.parse(localStorage.getItem("bestscores")) === "undefined") {
+                let bestscores = [];
+                localStorage.setItem("bestscores",JSON.stringify(bestscores));
+            }
             if (playername == "") {
                  player = {
                     name : "Anonymous",
                     playerscore: currentscore,
                 }
-            }
+                bestscores = JSON.parse(localStorage.getItem("bestscores"));
+                bestscores.push(player);
+                localStorage.setItem("bestscores",JSON.stringify(bestscores));
+                
+            }   
             else{
                  player = {
                     name : playername,
                     playerscore: currentscore,
                 }
+                bestscores = JSON.parse(localStorage.getItem("bestscores"));
+                bestscores.push(player);
+                localStorage.setItem("bestscores",JSON.stringify(bestscores));
+            }
+            if (JSON.parse(localStorage.getItem("bestscores")).length >2) {
+                bestscores = JSON.parse(localStorage.getItem("bestscores"));
+                bestscores.sort(function (x,y){
+                    return y.playerscore - x.playerscore;
+                })
+                localStorage.setItem("bestscores",JSON.stringify(bestscores));
+                document.getElementById("first").innerHTML =JSON.parse(localStorage.getItem("bestscores"))[0].name +", " + JSON.parse(localStorage.getItem("bestscores"))[0].playerscore;
+                document.getElementById("second").innerHTML =JSON.parse(localStorage.getItem("bestscores"))[1].name +", " + JSON.parse(localStorage.getItem("bestscores"))[1].playerscore;
+                document.getElementById("third").innerHTML =JSON.parse(localStorage.getItem("bestscores"))[2].name +", " + JSON.parse(localStorage.getItem("bestscores"))[2].playerscore;
+                
             }      
-            document.getElementById("first").innerHTML =JSON.parse(localStorage.getItem("bestscores"))[0].name +", " + JSON.parse(localStorage.getItem("bestscores"))[0].playerscore;
-            document.getElementById("second").innerHTML =JSON.parse(localStorage.getItem("bestscores"))[1].name +", " + JSON.parse(localStorage.getItem("bestscores"))[1].playerscore;
-            document.getElementById("third").innerHTML =JSON.parse(localStorage.getItem("bestscores"))[2].name +", " + JSON.parse(localStorage.getItem("bestscores"))[2].playerscore;
             reset();
             return;
         }
@@ -329,6 +351,9 @@
         document.getElementById('score').innerHTML = score;
         document.getElementById("colors").addEventListener('input',Color);
         document.getElementById("start").addEventListener("click", main);
+        document.getElementById("easy").addEventListener("click",easy);
+        document.getElementById("normal").addEventListener("click",normal);
+        document.getElementById("hard").addEventListener("click",hard);
     }        
 </script>
 </html>
