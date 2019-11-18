@@ -1,0 +1,12 @@
+    #familyid{
+      display: flex;
+      flex-flow: row;
+      justify-content: space-around;
+    }
+    #list{
+      text-align: center;
+      list-style: none;
+    }
+    img{
+      height: 100px;
+    }

@@ -1,0 +1,25 @@
+button,p{
+    display: inline;    
+    margin-bottom:5px;
+    margin-top: 5px;
+
+}
+div,label{
+    margin-top: 5px;
+}
+body{
+    background: url(bg.jpg);
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center ;
+    color: white;    
+}
+#snekcanvas{    
+    border: 2px black solid;
+    background-color: white;
+}
+#highscore{
+    font-weight: bold;
+}

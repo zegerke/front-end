@@ -1,0 +1,93 @@
+        html, body{
+            width: 100%;
+            height: 100%;
+        }
+        p{
+          margin: 0 0 0 0;
+          padding: 0 0 0 0 ;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: grey
+        }
+
+        button {
+            margin: 20px
+        }
+
+        #field {
+            width: 400px;
+            height: 400px;
+            display: flex;
+            flex-wrap: wrap;
+            grid-column: 2;
+            grid-row: 2
+        }
+        .cell {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white
+        }
+
+        .bgblack {
+            background-color: black;
+            color: white;
+        }
+        /* my code */
+        .redbg{
+          background-color: red;
+          color: white;
+        }
+        .greenbg{
+          background-color: green;
+          color: white;
+        }
+        .bluebg{
+          background-color: blue;
+          color: white
+        }
+        .grid{
+          display: grid;
+          grid-template-columns: 40px 400px 40px;
+          grid-template-rows: 40px 400px 40px;
+        }
+        .letterstop{
+          grid-column: 2;
+          grid-row: 1;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          background-color: brown;
+        }
+        .lettersbot{
+          grid-column: 2;
+          grid-row: 3;
+          display: flex;
+          justify-content: space-around;
+          background-color: brown;
+        }
+        .left{
+          grid-column: 1;
+          grid-row: 2;
+          display: flex;
+          flex-flow: column;
+          justify-content: space-around;
+          align-items: center;
+          background-color: brown;
+        }
+        .right{
+          grid-column: 3;
+          grid-row: 2;
+          display: flex;
+          flex-flow: column;
+          justify-content: space-around;
+          align-items: center;
+          background-color: brown;
+        }

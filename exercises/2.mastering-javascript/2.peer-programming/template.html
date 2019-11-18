@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
-    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="resources/stylesheet.css">
 
 </head>
 <body class="bg-dark pt-4">
@@ -42,60 +42,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
 
 
-<script>
-    console.log(document.getElementById("op").value);
-    
-    let button = document.getElementById('button');
-    button.addEventListener('click', clicky)
-    function clicky(){
-        console.log(document.getElementById("op").value);
-        console.log("Clicky");
-        button.innerHTML= "  Calculating...";
-        let icon = document.createElement("i");
-        icon.classList.add("fas")
-        icon.classList.add("fa-spinner")
-        icon.classList.add("fa-spin")
-        button.prepend(icon);
-
-        button.classList.remove("btn-primary");
-        button.classList.add("btn-success");
-        
-        setTimeout(() => {
-        let p = document.getElementById("pp")
-        button.classList.add("btn-primary");
-        button.classList.remove("btn-success");
-        button.removeChild(icon);
-        button.innerHTML = "Calculate!"    
-
-        if ((document.getElementById('input').value =="")||(document.getElementById('input2').value =="")) {
-            alert("Both inputs need to be filled in");
-        }
-        else{
-            switch (document.getElementById("op").value) {
-                case "+":
-                p.innerHTML=parseFloat( document.getElementById('input').value) +parseFloat( document.getElementById('input2').value);
-                document.getElementById("here").style.display ="inline";               
-                    break;
-            
-                case '-':
-                p.innerHTML=parseFloat( document.getElementById('input').value) - parseFloat( document.getElementById('input2').value);
-                document.getElementById("here").style.display ="inline";     
-                    break;
-                case "/":
-                p.innerHTML=parseFloat( document.getElementById('input').value) / parseFloat( document.getElementById('input2').value);
-                document.getElementById("here").style.display ="inline";     
-                    break;
-                case "*":
-                p.innerHTML=parseFloat( document.getElementById('input').value) * parseFloat( document.getElementById('input2').value);
-                document.getElementById("here").style.display ="inline";     
-                    break;                             
-            }
-
-        }
-
-        }, 500);
-    }
-
-</script>
+<script src="resources/template.js"></script>
 </body>
 </html>
