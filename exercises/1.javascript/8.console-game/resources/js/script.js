@@ -2,7 +2,7 @@
 //music
 let musicbut = document.getElementById('music');
 let musicon = false;
-musicbut.onclick = togglemusic();
+musicbut.onclick = togglemusic;
 
 function togglemusic(){
   if (musicon == true) {
