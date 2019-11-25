@@ -2,14 +2,14 @@ body{
     background: blanchedalmond;
     padding: 0px 150px;
 }
-.create{
+#create{
     display: flex;
     flex-flow: row;
     justify-content: space-between;
     margin-bottom: 10px;
 }
-.arena{
-    display: flex;
+#arena{
+    display: none;
     flex-flow: row;
     justify-content: space-between;
     border:2px solid black;
@@ -33,6 +33,11 @@ h1{
 }
 #health2{
     /*-webkit-appearance: none;*/
-
-
+}
+.moves{
+    margin-top: 5px;
+    text-align: center;
+}
+img{
+    height: 200px;
 }
