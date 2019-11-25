@@ -1,0 +1,38 @@
+body{
+    background: blanchedalmond;
+    padding: 0px 150px;
+}
+.create{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.arena{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    border:2px solid black;
+    margin-top: 5px;    
+    padding: 5px 5px;
+    width: 100%;
+}
+h1{
+    text-align: center;
+}
+.butts{
+    text-align: center;
+}
+.player1{
+    border: blue 2px solid;
+    padding: 5px 5px;
+}
+.player2{
+    border: solid red 2px;
+    padding: 5px 5px;
+}
+#health2{
+    /*-webkit-appearance: none;*/
+
+
+}
