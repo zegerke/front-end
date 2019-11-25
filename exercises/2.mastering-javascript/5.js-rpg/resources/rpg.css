@@ -1,43 +1,103 @@
 body{
     background: blanchedalmond;
-    padding: 0px 150px;
+    padding: 0px 100px;
+    
 }
 #create{
     display: flex;
     flex-flow: row;
+    flex-wrap: wrap;
     justify-content: space-between;
     margin-bottom: 10px;
+    max-width: 100%;
 }
 #arena{
     display: none;
     flex-flow: row;
+    flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
     border:2px solid black;
     margin-top: 5px;    
     padding: 5px 5px;
-    width: 100%;
+    max-width: 100%;
+    background-color: #c6bda1;
+    background-image: url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Page-1' fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='%23030204' fill-opacity='0.15'%3E%3Cpath d='M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); 
 }
 h1{
     text-align: center;
+    margin:21px 20px ;
 }
+p{
+    text-align: center;
+}
+#named1,#named2{
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+    text-transform: capitalize;    
+} 
 .butts{
     text-align: center;
 }
 .player1{
-    border: blue 2px solid;
+    background-color:  #80808080;
+    margin: 10px 10px;
     padding: 5px 5px;
 }
 .player2{
-    border: solid red 2px;
+    background-color: #a9a9a980;
+    margin: 10px 10px;
     padding: 5px 5px;
 }
+
 #health2{
-    /*-webkit-appearance: none;*/
+    -webkit-appearance: none;
 }
 .moves{
     margin-top: 5px;
     text-align: center;
 }
 img{
-    height: 200px;
+    max-height: 150px;
 }
+.display{
+    display: flex;
+    flex-wrap: wrap;
+}
+.caption{
+    display: block;
+}
+#health1,#health2{
+    text-align: center;
+}
+#dis1 img {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+#dis2{
+    flex-direction: row-reverse;
+}
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }

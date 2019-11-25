@@ -12,30 +12,30 @@
     <div id="create">
         <div class="P1">
             <select name="Race" id="race1">
-                <option value="human">Human</option>
+                <option value="dwarf">Dwarf</option>
                 <option value="orc"> Orc</option>
                 <option value="elf">Elf</option>
                 <option value="vampire">Vampire</option>
             </select>
             <select name="Weapon" id="weapon1">
-                <option value="boots">Boots</option>
+                <option value="knife">Knife</option>
                 <option value="staff">Staff</option>
                 <option value="sword">Sword</option>
                 <option value="bow">Bow</option>
             </select>
             <input id="name1" type="text">
         </div>
-
+        <h1>Vs</h1>
         <div class="P2">
             <input id="name2" type="text">
             <select name="Race" id="race2">
-                <option value="human">Human</option>
+                <option value="dwarf">Dwarf</option>
                 <option value="orc"> Orc</option>
                 <option value="elf">Elf</option>
                <option value="vampire">Vampire</option>
            </select>
             <select name="Weapon" id="weapon2">
-                <option value="boots">Boots</option>
+                <option value="knife">Knife</option>
                 <option value="staff">Staff</option>
                 <option value="sword">Sword</option>
                 <option value="bow">Bow</option>
@@ -47,9 +47,15 @@
     </div>
     <div id="arena">
         <div class="player1">
-            <div class="display">
-                <img id="displayrace1"></img>
-                <img id='displayitem1'></img>
+            <div id="dis1" class="display">
+                <div>
+                    <img id="displayrace1"></img>
+                    <p id="displayrace1C" class="captions"></p>
+                </div>
+                <div>
+                    <img id='displayitem1'></img>
+                    <p id='displayitem1C' class="captions"></p>
+                </div>
             </div>
             <p id="named1">namehere</p>
             <progress id="health1" value="100" max="100"></progress>
@@ -59,11 +65,18 @@
                 <button id="yield1">Yield</button>        
             </div>                       
         </div>
+        <h1>Vs</h1>
         <div class="player2">
-            <div class="display">
-                <img id="displayrace2"></img>
-                <img id='displayitem2'></img>
-            </div>
+            <div id="dis2" class="display">
+               <div>
+                   <img id="displayrace2"></img>
+                   <p id="displayrace2C" class="captions"></p>
+               </div>
+               <div>
+                   <img id='displayitem2'></img>
+                   <p id='displayitem2C'class="captions"></p>
+               </div>
+           </div>
             <p id="named2">namehere</p>
             <progress id="health2" value="100" max="100"></progress>
             <div class="moves">

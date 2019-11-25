@@ -5,74 +5,96 @@ let player2;
 function Createplayers(){
     let race1 = document.getElementById('race1').value;
     let name1 = document.getElementById('name1').value;
+    if (document.getElementById('name1').value == '') {
+        name1='player1'
+    }
     let weapon1 = document.getElementById('weapon1').value;
     player1 = new Person(name1,race1,weapon1);
     switch (player1.race) {
-        case 'human':
-            document.getElementById('displayrace1').src ='resources/human.png'    
+        case 'dwarf':
+            document.getElementById('displayrace1').src ='resources/dwarf.png'
+            document.getElementById('displayrace1C').innerHTML = 'Dwarven'    
         break;
     
         case "orc":
-            document.getElementById('displayrace1').src ='resources/orc.png'   
+            document.getElementById('displayrace1').src ='resources/orc.png'
+            document.getElementById('displayrace1C').innerHTML = 'Orc'    
         break;
         case "elf":
-            document.getElementById('displayrace1').src ='resources/elf.png'   
+            document.getElementById('displayrace1').src ='resources/elf.png'
+            document.getElementById('displayrace1C').innerHTML = 'Elven'    
         break;
         case 'vampire':
-            document.getElementById('displayrace1').src ='resources/vampire.png'   
+            document.getElementById('displayrace1').src ='resources/vampire.png' 
+            document.getElementById('displayrace1C').innerHTML = 'Vampire'   
         break;
 
     }
     switch (player1.item) {
-        case 'boots':
-            document.getElementById('displayitem1').src ='resources/boots.png'    
+        case 'knife':
+            document.getElementById('displayitem1').src ='resources/knife.png'  
+            document.getElementById('displayitem1C').innerHTML = 'Thief'    
         break;
     
         case "staff":
-            document.getElementById('displayitem1').src ='resources/staff.png'   
+            document.getElementById('displayitem1').src ='resources/staff.png'
+            document.getElementById('displayitem1C').innerHTML = 'Mage'    
         break;
         case "sword":
-            document.getElementById('displayitem1').src ='resources/sword.png'   
+            document.getElementById('displayitem1').src ='resources/sword.png'
+            document.getElementById('displayitem1C').innerHTML = 'Warrior'    
         break;
         case 'bow':
-            document.getElementById('displayitem1').src ='resources/bow.png'   
+            document.getElementById('displayitem1').src ='resources/bow.png'  
+            document.getElementById('displayitem1C').innerHTML = 'Ranger'  
         break;
 
     }
     document.getElementById('named1').innerHTML= name1
     let race2 = document.getElementById('race2').value;
     let name2 = document.getElementById('name2').value;
+    if (document.getElementById('name2').value == '') {
+        name2='player2'
+    }
     let weapon2 = document.getElementById('weapon2').value;
     player2 = new Person(name2,race2,weapon2);
     switch (player2.race) {
-        case 'human':
-            document.getElementById('displayrace2').src ='resources/human.png'    
+        case 'dwarf':
+            document.getElementById('displayrace2').src ='resources/dwarf.png'   
+            document.getElementById('displayrace2C').innerHTML = 'Dwarven'   
         break;
     
         case "orc":
-            document.getElementById('displayrace2').src ='resources/orc.png'   
+            document.getElementById('displayrace2').src ='resources/orc.png'  
+            document.getElementById('displayrace2C').innerHTML = 'Orc'   
         break;
         case "elf":
             document.getElementById('displayrace2').src ='resources/elf.png'   
+            document.getElementById('displayrace2C').innerHTML = 'Elven'  
         break;
         case 'vampire':
-            document.getElementById('displayrace2').src ='resources/vampire.png'   
+            document.getElementById('displayrace2').src ='resources/vampire.png' 
+            document.getElementById('displayrace2C').innerHTML = 'Vampire'    
         break;
 
     }
     switch (player2.item) {
-        case 'boots':
-            document.getElementById('displayitem2').src ='resources/boots.png'    
+        case 'knife':
+            document.getElementById('displayitem2').src ='resources/knife.png'   
+            document.getElementById('displayitem2C').innerHTML = 'Thief'  
         break;
     
         case "staff":
             document.getElementById('displayitem2').src ='resources/staff.png'   
+            document.getElementById('displayitem2C').innerHTML = 'Mage'
         break;
         case "sword":
             document.getElementById('displayitem2').src ='resources/sword.png'   
+            document.getElementById('displayitem2C').innerHTML = 'Warrior'
         break;
         case 'bow':
-            document.getElementById('displayitem2').src ='resources/bow.png'   
+            document.getElementById('displayitem2').src ='resources/bow.png'  
+            document.getElementById('displayitem2C').innerHTML = 'Ranger'    
         break;
 
     }
