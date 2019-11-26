@@ -6,16 +6,17 @@ function Person(name,race,item){
     this.maxHealth = 100;
     if (this.race == 'orc') {
         this.maxHealth = 120;
-        this.currenthealth = 140;
+        this.currenthealth = 120;
     }
-    this.minD = 3;
-    this.minH = 3
+    this.minD = 7;
+    this.minH = 8
     this.maxDamage = 20;
     this.maxHealing = 24;
     if (this.item == 'sword') {
         this.minD = 4;
         this.maxDamage = 26
     }
+    
     if (this.item == 'staff') {
         this.minH = 3.6;
         this.maxHealing = 30;

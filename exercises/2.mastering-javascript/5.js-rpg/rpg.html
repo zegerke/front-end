@@ -60,6 +60,7 @@
             <p id="named1">namehere</p>
             <div class="prog">
                 <progress id="health1" value="100" max="100"></progress>
+                <h1 id="healthtext1"></h1>
             </div>
             <div class="moves">
                 <button id="attack1">Attack</button>
@@ -81,6 +82,7 @@
            </div>
             <p id="named2">namehere</p>
             <div class="prog">
+                    <h1 id="healthtext2"></h1>
                 <progress id="health2" value="100" max="100"></progress>
             </div>
             
@@ -91,10 +93,15 @@
             </div>   
         </div>
     </div>
-    <div class="prog">
-        <div id="log">
-            
+    <div class="proge">
+        <div id="log">   
         </div>
+        <div id="music">Music OFF</div>
+        <div id="sound">Sound ON</div>
+        <audio id="themeSong" src="resources/rpg.wav" type="audio/mpeg" loop ></audio>
+        <audio id="healsound" src="resources/heal.mp3" type="audio/mpeg" ></audio>
+        <audio id="damagesound" src="resources/damage.mp3" type="audio/mpeg"></audio>
+        <audio id="winsound" src="resources/win.mp3" type="audio/mpeg"></audio>
     </div>    
 
 </body>

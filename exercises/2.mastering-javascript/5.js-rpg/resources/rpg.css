@@ -81,6 +81,7 @@ img{
 }
 .display{
     display: flex;
+    justify-content:center;
     flex-wrap: wrap;
 }
 .caption{
@@ -122,17 +123,29 @@ img{
   }
 .prog{
     display: flex;
+    flex-flow: row;
     justify-content: center;
+    align-items: center;
     margin-bottom: 10px;
+}
+.proge{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
 }
 #log{
     max-width: 300px;
     min-width: 250px;
     height: 200px;
-    background-color: white;
+    background-color: #ece7d4;
     margin-top:10px ;
     overflow: auto;
-    padding: 5px 5px;
+    padding: 10px 10px;
+    border: 4px solid rgba(15,94,14,0.78);
+    border-radius: 29px;
+    -webkit-box-shadow: inset 0px 0px 15px 3px #000000; 
+    box-shadow: inset 0px 0px 15px 3px #000000;
 }
 @media only screen and (max-width: 1050px) {
     #arena {

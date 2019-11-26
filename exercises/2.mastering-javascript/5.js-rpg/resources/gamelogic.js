@@ -2,6 +2,7 @@
 document.getElementById('start').addEventListener('click',Createplayers);
 let player1;
 let player2;
+
 let log = document.getElementById("log");
 function Createplayers(){
     let race1 = document.getElementById('race1').value;
@@ -100,7 +101,6 @@ function Createplayers(){
 
     }
     document.getElementById('named2').innerHTML= name2
-    console.log(player1,player2);
     document.getElementById('create').style.display = 'none'
     document.getElementById('start').style.display = 'none';
     document.getElementById('title').innerHTML = "  FIGHT!"
@@ -109,8 +109,8 @@ function Createplayers(){
     document.getElementById('attack1').addEventListener("click",a1);
     document.getElementById('heal1').addEventListener("click",h1);
     document.getElementById('heal2').addEventListener("click",h2);
-    log.innerHTML +=`${player1.name} is a ${player1.race}, he wields  ${player1.item}, his total health points are ${player1.maxHealth}.`+"<br>";
-    log.innerHTML +=`${player2.name} is a ${player2.race}, he wields  ${player2.item}, his total health points are ${player2.maxHealth}.`+"<br>";
+    log.insertAdjacentHTML("afterbegin",`${player1.name} is a ${player1.race}, he wields a ${player1.item}, his total health points are ${player1.maxHealth}.`+"<br>");
+    log.insertAdjacentHTML("afterbegin",`${player2.name} is a ${player2.race}, he wields a ${player2.item}, his total health points are ${player2.maxHealth}.`+"<br>");
     updatehealth()
 }
 //update healthbar
@@ -119,6 +119,8 @@ function updatehealth() {
     document.getElementById("health1").max = player1.maxHealth;
     document.getElementById("health2").value = player2.currenthealth;
     document.getElementById("health2").max = player2.maxHealth;
+    document.getElementById("healthtext1").innerHTML = `${player1.currenthealth}/${player1.maxHealth}`;
+    document.getElementById("healthtext2").innerHTML = `${player2.currenthealth}/${player2.maxHealth}`
 }
 //damage
 let turn = true
@@ -152,14 +154,17 @@ function Damage() {
         you = player2;
         enemy = player1;
     }
+    document.getElementById("damagesound").play();
     let damage = (Math.round(Math.random()*(you.maxDamage - you.minD +1))+you.minD);
     enemy.currenthealth -= damage ;
+    log.insertAdjacentHTML("afterbegin",`${you.name} did ${damage} damage to ${enemy.name}.`+"<br>");
     if (you.item == 'bow') {
         let r = Math.random() * 100;
         if (r < 30) {
-            alert('kjhgfds')
+            document.getElementById("damagesound").play();
             damage = (Math.round(Math.random()*(you.maxDamage - you.minD +1))+you.minD);
             enemy.currenthealth -= damage ;
+            log.insertAdjacentHTML("afterbegin",`${you.name} attacked again, and did${damage} damage to ${enemy.name}.`+"<br>");
         }
     }
 // game end
@@ -171,14 +176,21 @@ function Damage() {
 function Endgame(enemy) {
     if (enemy == player1) {
         alert("player2 wins")
+        log.insertAdjacentHTML("afterbegin",`${player1.name} has won`+"<br>");
     }
     else {
         alert("player1 wins")
+        log.insertAdjacentHTML("afterbegin",`${player2.name} has won`+"<br>");
     }
-    document.getElementById('create').style.display = 'flex'
-    document.getElementById('start').style.display = 'inline'
-    document.getElementById('title').innerHTML = "Choose Your Fighter"
-    document.getElementById("arena").style.display = "none"
+    document.getElementById("winsound").play();
+    document.getElementById('title').innerHTML = "GAME OVER"
+    setTimeout(() => {
+        document.getElementById('create').style.display = 'flex'
+        document.getElementById('start').style.display = 'inline'
+        document.getElementById('title').innerHTML = "Choose Your Fighter"
+        document.getElementById("arena").style.display = "none"
+    }, 3000);
+
 }
 //heal
 function h1() {
@@ -207,27 +219,67 @@ function Heal() {
     if (turn == false) {
         you = player2;
     }
+    document.getElementById("healsound").play();
     let heal = (Math.round(Math.random()*(you.maxHealing - you.minH +1))+you.minH);
-    console.log(heal);
-    
     you.currenthealth += heal
+    log.insertAdjacentHTML("afterbegin",`${you.name} healed for ${heal}.`+"<br>");
     if (you.currenthealth >= you.maxHealth) {
         you.currenthealth = you.maxHealth;
     }
-    console.log(you.currenthealth);
 }
 //yield
 document.getElementById('yield1').addEventListener("click",function () {
-    alert('player1 has yielded')
-    document.getElementById('create').style.display = 'flex'
-    document.getElementById('start').style.display = 'inline'
-    document.getElementById('title').innerHTML = "Choose Your Fighter"
-    document.getElementById("arena").style.display = "none"
+    log.insertAdjacentHTML("afterbegin", `${player1.name} has yielded.`+"<br>");
+    document.getElementById('title').innerHTML = "GAME OVER"
+    document.getElementById("winsound").play();
+    setTimeout(() => {
+        document.getElementById('create').style.display = 'flex'
+        document.getElementById('start').style.display = 'inline'
+        document.getElementById('title').innerHTML = "Choose Your Fighter"
+        document.getElementById("arena").style.display = "none" 
+    }, 3000);
+    
 });
 document.getElementById('yield2').addEventListener("click",function () {
-    alert('player2 has yielded')
-    document.getElementById('create').style.display = 'flex'
-    document.getElementById('start').style.display = 'inline'
-    document.getElementById('title').innerHTML = "Choose Your Fighter"
-    document.getElementById("arena").style.display = "none"
+    log.insertAdjacentHTML("afterbegin", `${player2.name} has yielded.`+"<br>");
+    document.getElementById('title').innerHTML = "GAME OVER"
+    document.getElementById("winsound").play();
+    setTimeout(() => {
+        document.getElementById('create').style.display = 'flex'
+        document.getElementById('start').style.display = 'inline'
+        document.getElementById('title').innerHTML = "Choose Your Fighter"
+        document.getElementById("arena").style.display = "none" 
+    }, 3000);
 });
+//music
+let musicbut = document.getElementById('music');
+let musicon = false;
+musicbut.onclick = togglemusic;
+
+function togglemusic(){
+  if (musicon == true) {
+    musicbut.innerHTML ="Music OFF";
+    musicon = false;
+    document.getElementById('themeSong').pause();
+  }
+  else {
+    musicbut.innerHTML = "Music ON";
+    musicon = true;
+    document.getElementById('themeSong').play();
+  }
+};
+//sound
+let soundbut = document.getElementById('sound');
+let soundon = true;
+soundbut.onclick = togglesound;
+
+function togglesound(){
+  if (soundon == true) {
+    soundbut.innerHTML ="Sound OFF";
+    soundon = false;
+  }
+  else {
+    soundbut.innerHTML = "Sound OFF";
+    soundon = true;
+  }
+};
