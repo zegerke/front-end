@@ -2,11 +2,12 @@
 document.getElementById('start').addEventListener('click',Createplayers);
 let player1;
 let player2;
+let log = document.getElementById("log");
 function Createplayers(){
     let race1 = document.getElementById('race1').value;
     let name1 = document.getElementById('name1').value;
     if (document.getElementById('name1').value == '') {
-        name1='player1'
+        name1='Player1'
     }
     let weapon1 = document.getElementById('weapon1').value;
     player1 = new Person(name1,race1,weapon1);
@@ -54,7 +55,7 @@ function Createplayers(){
     let race2 = document.getElementById('race2').value;
     let name2 = document.getElementById('name2').value;
     if (document.getElementById('name2').value == '') {
-        name2='player2'
+        name2='Player2'
     }
     let weapon2 = document.getElementById('weapon2').value;
     player2 = new Person(name2,race2,weapon2);
@@ -101,12 +102,15 @@ function Createplayers(){
     document.getElementById('named2').innerHTML= name2
     console.log(player1,player2);
     document.getElementById('create').style.display = 'none'
-    document.getElementById('start').style.display = 'none'
+    document.getElementById('start').style.display = 'none';
+    document.getElementById('title').innerHTML = "  FIGHT!"
     document.getElementById("arena").style.display = "flex"
     document.getElementById('attack2').addEventListener("click",a2);
     document.getElementById('attack1').addEventListener("click",a1);
     document.getElementById('heal1').addEventListener("click",h1);
     document.getElementById('heal2').addEventListener("click",h2);
+    log.innerHTML +=`${player1.name} is a ${player1.race}, he wields  ${player1.item}, his total health points are ${player1.maxHealth}.`+"<br>";
+    log.innerHTML +=`${player2.name} is a ${player2.race}, he wields  ${player2.item}, his total health points are ${player2.maxHealth}.`+"<br>";
     updatehealth()
 }
 //update healthbar
@@ -173,6 +177,7 @@ function Endgame(enemy) {
     }
     document.getElementById('create').style.display = 'flex'
     document.getElementById('start').style.display = 'inline'
+    document.getElementById('title').innerHTML = "Choose Your Fighter"
     document.getElementById("arena").style.display = "none"
 }
 //heal
@@ -216,11 +221,13 @@ document.getElementById('yield1').addEventListener("click",function () {
     alert('player1 has yielded')
     document.getElementById('create').style.display = 'flex'
     document.getElementById('start').style.display = 'inline'
+    document.getElementById('title').innerHTML = "Choose Your Fighter"
     document.getElementById("arena").style.display = "none"
 });
 document.getElementById('yield2').addEventListener("click",function () {
     alert('player2 has yielded')
     document.getElementById('create').style.display = 'flex'
     document.getElementById('start').style.display = 'inline'
+    document.getElementById('title').innerHTML = "Choose Your Fighter"
     document.getElementById("arena").style.display = "none"
 });

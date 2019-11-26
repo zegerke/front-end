@@ -1,13 +1,28 @@
 body{
-    background: blanchedalmond;
+    background: #4A4B2F;
+    background-image: url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Page-1' fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='%23030204' fill-opacity='0.15'%3E%3Cpath d='M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); 
     padding: 0px 100px;
-    
+    color: #12100E;
+}
+button, select{
+    padding: 5px 5px;
+    font-size: 16px;
+    font-weight: bolder;
+    background-color: #6B654B;
+    border: none;
+    border-radius: 5px;
+    margin: 5px 5px;
+}
+input{
+    padding: 5px 5px;
+    font-size: 16px;
 }
 #create{
     display: flex;
     flex-flow: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 10px;
     max-width: 100%;
 }
@@ -26,10 +41,12 @@ body{
 }
 h1{
     text-align: center;
-    margin:21px 20px ;
+    margin:10px 10px ;
+
 }
 p{
     text-align: center;
+    margin:10px 10px
 }
 #named1,#named2{
     font-size: 20px;
@@ -38,6 +55,7 @@ p{
     text-transform: capitalize;    
 } 
 .butts{
+    margin-top: 10px;
     text-align: center;
 }
 .player1{
@@ -70,6 +88,7 @@ img{
 }
 #health1,#health2{
     text-align: center;
+    width: 200px;
 }
 #dis1 img {
     -webkit-transform: scaleX(-1);
@@ -101,3 +120,34 @@ img{
   .tooltip:hover .tooltiptext {
     visibility: visible;
   }
+.prog{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+#log{
+    max-width: 300px;
+    min-width: 250px;
+    height: 200px;
+    background-color: white;
+    margin-top:10px ;
+    overflow: auto;
+    padding: 5px 5px;
+}
+@media only screen and (max-width: 1050px) {
+    #arena {
+      flex-flow: column;
+    }
+    body{
+        padding: 10px 10px;
+    }
+  }
+  @media only screen and (max-width: 900px) {
+      #create{
+          flex-flow: column;
+      }
+  }
+  @media only screen and (max-width: 380px) {
+      img{
+          max-width: 100px;
+      }
