@@ -8,21 +8,29 @@ function Person(name,race,item){
         this.maxHealth = 120;
         this.currenthealth = 120;
     }
-    this.minD = 7;
-    this.minH = 8
+    this.dodgechance = 5
+    this.minD = 8;
+    this.minH = 4
     this.maxDamage = 20;
     this.maxHealing = 24;
     if (this.item == 'sword') {
-        this.minD = 4;
-        this.maxDamage = 26
+        this.minD += 2;
+        this.maxDamage += 6;
     }
     
     if (this.item == 'staff') {
-        this.minH = 3.6;
-        this.maxHealing = 30;
+        this.minH += 1;
+        this.maxHealing += 6;
     }
-
-    this.displayChar = function(){
-        return console.log(`${this.name} is a ${this.race}, he wields  ${this.item}, his total health points are ${this.maxHealth}`);
-    };
+    if (this.race == "dwarf") {
+        this.maxHealth += 10;
+        this.currenthealth += 10;
+        this.dodgechance += 5;
+    }
+    if (this.race =="elf") {
+        this.dodgechance += 10;
+    }
+    if (this.item == "knife") {
+        this.dodgechance += 6
+    }
 }

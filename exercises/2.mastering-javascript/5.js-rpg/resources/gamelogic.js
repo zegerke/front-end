@@ -100,6 +100,9 @@ function Createplayers(){
         break;
 
     }
+    if (soundon == true) {
+        document.getElementById("fightsound").play();   
+    }
     document.getElementById('named2').innerHTML= name2
     document.getElementById('create').style.display = 'none'
     document.getElementById('start').style.display = 'none';
@@ -111,7 +114,9 @@ function Createplayers(){
     document.getElementById('heal2').addEventListener("click",h2);
     log.insertAdjacentHTML("afterbegin",`${player1.name} is a ${player1.race}, he wields a ${player1.item}, his total health points are ${player1.maxHealth}.`+"<br>");
     log.insertAdjacentHTML("afterbegin",`${player2.name} is a ${player2.race}, he wields a ${player2.item}, his total health points are ${player2.maxHealth}.`+"<br>");
-    updatehealth()
+    updatehealth();
+    console.log(player1,player2);
+    
 }
 //update healthbar
 function updatehealth() {
@@ -154,14 +159,16 @@ function Damage() {
         you = player2;
         enemy = player1;
     }
-    document.getElementById("damagesound").play();
+    
+    if (soundon == true) {
+        document.getElementById("damagesound").play();   
+    }
     let damage = (Math.round(Math.random()*(you.maxDamage - you.minD +1))+you.minD);
     enemy.currenthealth -= damage ;
     log.insertAdjacentHTML("afterbegin",`${you.name} did ${damage} damage to ${enemy.name}.`+"<br>");
     if (you.item == 'bow') {
         let r = Math.random() * 100;
         if (r < 30) {
-            document.getElementById("damagesound").play();
             damage = (Math.round(Math.random()*(you.maxDamage - you.minD +1))+you.minD);
             enemy.currenthealth -= damage ;
             log.insertAdjacentHTML("afterbegin",`${you.name} attacked again, and did${damage} damage to ${enemy.name}.`+"<br>");
@@ -182,7 +189,9 @@ function Endgame(enemy) {
         alert("player1 wins")
         log.insertAdjacentHTML("afterbegin",`${player2.name} has won`+"<br>");
     }
-    document.getElementById("winsound").play();
+    if (soundon == true) {
+        document.getElementById("winsound").play();   
+    }
     document.getElementById('title').innerHTML = "GAME OVER"
     setTimeout(() => {
         document.getElementById('create').style.display = 'flex'
@@ -219,7 +228,10 @@ function Heal() {
     if (turn == false) {
         you = player2;
     }
-    document.getElementById("healsound").play();
+    
+    if (soundon == true) {
+        document.getElementById("healsound").play();  
+    }
     let heal = (Math.round(Math.random()*(you.maxHealing - you.minH +1))+you.minH);
     you.currenthealth += heal
     log.insertAdjacentHTML("afterbegin",`${you.name} healed for ${heal}.`+"<br>");
@@ -231,7 +243,9 @@ function Heal() {
 document.getElementById('yield1').addEventListener("click",function () {
     log.insertAdjacentHTML("afterbegin", `${player1.name} has yielded.`+"<br>");
     document.getElementById('title').innerHTML = "GAME OVER"
-    document.getElementById("winsound").play();
+    if (soundon == true) {
+        document.getElementById("winsound").play();   
+    }
     setTimeout(() => {
         document.getElementById('create').style.display = 'flex'
         document.getElementById('start').style.display = 'inline'
@@ -243,7 +257,9 @@ document.getElementById('yield1').addEventListener("click",function () {
 document.getElementById('yield2').addEventListener("click",function () {
     log.insertAdjacentHTML("afterbegin", `${player2.name} has yielded.`+"<br>");
     document.getElementById('title').innerHTML = "GAME OVER"
-    document.getElementById("winsound").play();
+    if (soundon == true) {
+        document.getElementById("winsound").play();   
+    }
     setTimeout(() => {
         document.getElementById('create').style.display = 'flex'
         document.getElementById('start').style.display = 'inline'
@@ -253,6 +269,8 @@ document.getElementById('yield2').addEventListener("click",function () {
 });
 //music
 let musicbut = document.getElementById('music');
+let music = document.getElementById('themeSong');
+music.volume = 0.2
 let musicon = false;
 musicbut.onclick = togglemusic;
 
@@ -260,12 +278,12 @@ function togglemusic(){
   if (musicon == true) {
     musicbut.innerHTML ="Music OFF";
     musicon = false;
-    document.getElementById('themeSong').pause();
+    music.pause();
   }
   else {
     musicbut.innerHTML = "Music ON";
     musicon = true;
-    document.getElementById('themeSong').play();
+    music.play();
   }
 };
 //sound
@@ -279,7 +297,7 @@ function togglesound(){
     soundon = false;
   }
   else {
-    soundbut.innerHTML = "Sound OFF";
+    soundbut.innerHTML = "Sound ON";
     soundon = true;
   }
 };
