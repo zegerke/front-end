@@ -159,46 +159,50 @@ function Damage() {
         you = player2;
         enemy = player1;
     }
-    
-    if (soundon == true) {
-        document.getElementById("damagesound").play();   
-    }
     let chance = enemy.dodgechance;
-    let n = Math.floor(Math.random() * 101); 
+    let n = Math.floor(Math.random() * 101);
+    let damage 
     console.log(n)
     if (n < chance) {
         log.insertAdjacentHTML("afterbegin",`${enemy.name} dodged the attack.`+"<br>");
+        if (soundon == true) {
+            document.getElementById("dodgesound").play();   
+        }   
     } else {
-        let damage = (Math.round(Math.random()*(you.maxDamage - you.minD +1))+you.minD);
+        damage = (Math.round(Math.random()*(you.maxDamage - you.minD +1))+you.minD);
         enemy.currenthealth -= damage ;
-        log.insertAdjacentHTML("afterbegin",`${you.name} did ${damage} damage to ${enemy.name}.`+"<br>");   
-    }
-    
-    if (you.race == "vampire") {
-        if (you.currenthealth >= you.maxHealth) {
-            you.currenthealth = you.maxHealth;
-        }else{
-            you.currenthealth += Math.ceil(damage/5)
-            log.insertAdjacentHTML("afterbegin",`${you.name} stole ${Math.ceil(damage/5)} health from ${enemy.name} .`+"<br>")
+        log.insertAdjacentHTML("afterbegin",`${you.name} did ${damage} damage to ${enemy.name}.`+"<br>");
+        if (soundon == true) {
+            document.getElementById("damagesound").play();   
+        }   
+        if (you.race == "vampire") {
+            if (you.currenthealth >= you.maxHealth) {
+                you.currenthealth = you.maxHealth;
+            }else{
+                you.currenthealth += Math.ceil(damage/5)
+                log.insertAdjacentHTML("afterbegin",`${you.name} stole ${Math.ceil(damage/5)} health from ${enemy.name} .`+"<br>")
+            }
+            
         }
-        
-    }
-    if (you.item == 'bow') {
-        let r = Math.random() * 100;
-        if (r < 30) {
-            damage = (Math.round(Math.random()*(you.maxDamage - you.minD +1))+you.minD);
-            enemy.currenthealth -= damage ;
-            log.insertAdjacentHTML("afterbegin",`${you.name} attacked again, and did${damage} damage to ${enemy.name}.`+"<br>");
-            if (you.race == "vampire") {
-                if (you.currenthealth >= you.maxHealth) {
-                    you.currenthealth = you.maxHealth;
-                }else{
-                    you.currenthealth += Math.ceil(damage/5)
-                    log.insertAdjacentHTML("afterbegin",`${you.name} stole ${Math.ceil(damage/5)} health from ${enemy.name} .`+"<br>")
+        if (you.item == 'bow') {
+            let r = Math.random() * 100;
+            if (r < 20) {
+                damage = (Math.round(Math.random()*(you.maxDamage - you.minD +1))+you.minD);
+                enemy.currenthealth -= damage ;
+                log.insertAdjacentHTML("afterbegin",`${you.name} attacked again, and did ${damage} damage to ${enemy.name}.`+"<br>");
+                if (you.race == "vampire") {
+                    if (you.currenthealth >= you.maxHealth) {
+                        you.currenthealth = you.maxHealth;
+                    }else{
+                        you.currenthealth += Math.ceil(damage/5)
+                        log.insertAdjacentHTML("afterbegin",`${you.name} stole ${Math.ceil(damage/5)} health from ${enemy.name} .`+"<br>")
+                    }
                 }
             }
         }
     }
+    
+
 // game end
     if (enemy.currenthealth <= 0) {
         Endgame(enemy);
@@ -207,12 +211,10 @@ function Damage() {
 }
 function Endgame(enemy) {
     if (enemy == player1) {
-        alert("player2 wins")
-        log.insertAdjacentHTML("afterbegin",`${player1.name} has won`+"<br>");
+        log.insertAdjacentHTML("afterbegin",`${player2.name} has won`+"<br>");
     }
     else {
-        alert("player1 wins")
-        log.insertAdjacentHTML("afterbegin",`${player2.name} has won`+"<br>");
+        log.insertAdjacentHTML("afterbegin",`${player1.name} has won`+"<br>");
     }
     if (soundon == true) {
         document.getElementById("winsound").play();   
