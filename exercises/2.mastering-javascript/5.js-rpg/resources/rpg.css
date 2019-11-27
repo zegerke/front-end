@@ -6,6 +6,7 @@ body{
     padding: 0px 100px;
     color: #12100E;
     font-family: 'Almendra', serif;
+    cursor:url("Gold sword.cur"),auto;
 }
 button, select{
     padding: 5px 5px;
@@ -16,9 +17,11 @@ button, select{
     border-radius: 5px;
     margin: 5px 5px;
     font-family: 'Almendra', serif;
+    cursor:url("Gold sword.cur"),auto;
 }
 button:hover{
     color: white;
+
 }
 input{
     padding: 5px 5px;
