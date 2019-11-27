@@ -163,15 +163,40 @@ function Damage() {
     if (soundon == true) {
         document.getElementById("damagesound").play();   
     }
-    let damage = (Math.round(Math.random()*(you.maxDamage - you.minD +1))+you.minD);
-    enemy.currenthealth -= damage ;
-    log.insertAdjacentHTML("afterbegin",`${you.name} did ${damage} damage to ${enemy.name}.`+"<br>");
+    let chance = enemy.dodgechance;
+    let n = Math.floor(Math.random() * 101); 
+    console.log(n)
+    if (n < chance) {
+        log.insertAdjacentHTML("afterbegin",`${enemy.name} dodged the attack.`+"<br>");
+    } else {
+        let damage = (Math.round(Math.random()*(you.maxDamage - you.minD +1))+you.minD);
+        enemy.currenthealth -= damage ;
+        log.insertAdjacentHTML("afterbegin",`${you.name} did ${damage} damage to ${enemy.name}.`+"<br>");   
+    }
+    
+    if (you.race == "vampire") {
+        if (you.currenthealth >= you.maxHealth) {
+            you.currenthealth = you.maxHealth;
+        }else{
+            you.currenthealth += Math.ceil(damage/5)
+            log.insertAdjacentHTML("afterbegin",`${you.name} stole ${Math.ceil(damage/5)} health from ${enemy.name} .`+"<br>")
+        }
+        
+    }
     if (you.item == 'bow') {
         let r = Math.random() * 100;
         if (r < 30) {
             damage = (Math.round(Math.random()*(you.maxDamage - you.minD +1))+you.minD);
             enemy.currenthealth -= damage ;
             log.insertAdjacentHTML("afterbegin",`${you.name} attacked again, and did${damage} damage to ${enemy.name}.`+"<br>");
+            if (you.race == "vampire") {
+                if (you.currenthealth >= you.maxHealth) {
+                    you.currenthealth = you.maxHealth;
+                }else{
+                    you.currenthealth += Math.ceil(damage/5)
+                    log.insertAdjacentHTML("afterbegin",`${you.name} stole ${Math.ceil(damage/5)} health from ${enemy.name} .`+"<br>")
+                }
+            }
         }
     }
 // game end

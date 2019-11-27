@@ -147,6 +147,9 @@ img{
     -webkit-box-shadow: inset 0px 0px 15px 3px #000000; 
     box-shadow: inset 0px 0px 15px 3px #000000;
 }
+#title, #music, #sound{
+    color: white;
+}
 @media only screen and (max-width: 1050px) {
     #arena {
       flex-flow: column;
