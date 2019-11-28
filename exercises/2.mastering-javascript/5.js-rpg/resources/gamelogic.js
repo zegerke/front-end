@@ -137,6 +137,8 @@ function a1() {
     document.getElementById('heal2').addEventListener("click",h2);
     document.getElementById('attack1').removeEventListener("click",a1);
     document.getElementById('attack2').addEventListener("click",a2);
+    document.getElementById("point1").style.display = "none"
+    document.getElementById("point2").style.display = "inline"
 };
 function a2 () {
     turn = false;
@@ -146,6 +148,8 @@ function a2 () {
     document.getElementById('attack1').addEventListener("click",a1);
     document.getElementById('heal2').removeEventListener("click",h2);
     document.getElementById('heal1').addEventListener("click",h1);
+    document.getElementById("point2").style.display = "none"
+    document.getElementById("point1").style.display = "inline"
 };
 
 function Damage() {
@@ -225,6 +229,8 @@ function Endgame(enemy) {
         document.getElementById('start').style.display = 'inline'
         document.getElementById('title').innerHTML = "Choose Your Fighter"
         document.getElementById("arena").style.display = "none"
+        document.getElementById("point2").style.display = "inline"
+        document.getElementById("point1").style.display = "inline"
     }, 3000);
 
 }
@@ -237,6 +243,8 @@ function h1() {
     document.getElementById('heal2').addEventListener("click",h2);
     document.getElementById('attack1').removeEventListener("click",a1);
     document.getElementById('attack2').addEventListener("click",a2);
+    document.getElementById("point1").style.display = "none"
+    document.getElementById("point2").style.display = "inline"
 };
 function h2() {
     turn = false;
@@ -246,6 +254,8 @@ function h2() {
     document.getElementById('heal1').addEventListener("click",h1);
     document.getElementById('attack2').removeEventListener("click",a2);
     document.getElementById('attack1').addEventListener("click",a1);
+    document.getElementById("point2").style.display = "none"
+    document.getElementById("point1").style.display = "inline"
 };
 function Heal() {
     let you
@@ -278,6 +288,8 @@ document.getElementById('yield1').addEventListener("click",function () {
         document.getElementById('start').style.display = 'inline'
         document.getElementById('title').innerHTML = "Choose Your Fighter"
         document.getElementById("arena").style.display = "none" 
+        document.getElementById("point2").style.display = "inline"
+        document.getElementById("point1").style.display = "inline"
     }, 3000);
     
 });
@@ -292,6 +304,8 @@ document.getElementById('yield2').addEventListener("click",function () {
         document.getElementById('start').style.display = 'inline'
         document.getElementById('title').innerHTML = "Choose Your Fighter"
         document.getElementById("arena").style.display = "none" 
+        document.getElementById("point2").style.display = "inline"
+        document.getElementById("point1").style.display = "inline"
     }, 3000);
 });
 //music
